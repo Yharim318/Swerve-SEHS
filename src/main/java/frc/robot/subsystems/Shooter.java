@@ -10,6 +10,7 @@ public class Shooter {
     CANSparkMax ShooterMotor1;
     CANSparkMax ShooterMotor2;
     XboxController cXboxControllerontroller;
+    float speedMultiplier = 0.5f;
 
     public Shooter(int shooterMotor1, int shooterMotor2, int controller ){
         ShooterMotor1 = new CANSparkMax(shooterMotor1, MotorType.kBrushless);
@@ -20,7 +21,7 @@ public class Shooter {
         ShooterMotor2.setIdleMode(IdleMode.kBrake);
     }
     public void Shoot(){
-        ShooterMotor1.set(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis());
-        ShooterMotor2.set(-(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()));
+        ShooterMotor1.set(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis() * speedMultiplier);
+        ShooterMotor2.set(-(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) *speedMultiplier);
     }
 }
