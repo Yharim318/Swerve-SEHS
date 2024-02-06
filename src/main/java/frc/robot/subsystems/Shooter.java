@@ -1,16 +1,17 @@
 package frc.robot.subsystems;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Shooter {
-    CANSparkMax ShooterMotor1;
-    CANSparkMax ShooterMotor2;
-    XboxController cXboxControllerontroller;
-    float speedMultiplier = 0.5f;
+    private CANSparkMax ShooterMotor1;
+    private CANSparkMax ShooterMotor2;
+    private XboxController cXboxControllerontroller;
+
+    private float AmpMultiplier = 0.2f; // THIS NEEDS TO BE CALIBRATED 
+    private float SpeakerMultiplier = 0.5f; // THIS NEEDS TO BE CALIBRATED 
+    private float SetSpeed;
 
     public Shooter(int shooterMotor1, int shooterMotor2, int controller ){
         ShooterMotor1 = new CANSparkMax(shooterMotor1, MotorType.kBrushless);
@@ -21,7 +22,15 @@ public class Shooter {
         ShooterMotor2.setIdleMode(IdleMode.kBrake);
     }
     public void Shoot(){
-        ShooterMotor1.set(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis() * speedMultiplier);
-        ShooterMotor2.set(-(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) *speedMultiplier);
+        if (cXboxControllerontroller.getYButton())
+
+            SetSpeed = SpeakerMultiplier;
+            
+        else 
+
+            SetSpeed = AmpMultiplier;
+
+        ShooterMotor1.set(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis() * SetSpeed);
+        ShooterMotor2.set(-(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
     }
 }
