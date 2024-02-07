@@ -19,7 +19,7 @@ public final class Constants {
         public static final int pigeonID = 40;
 
         public static final COTSTalonFXSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot
-        COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.Falcon500(COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.driveRatios.X1_10);
+        COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.Falcon500(COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.driveRatios.X1_12);
 
         /* Drivetrain Constants */
         public static final double trackWidth = Units.inchesToMeters(30); //TODO: This must be tuned to specific robot
