@@ -19,7 +19,8 @@ public final class Constants {
         public static final int pigeonID = 1;
 
         public static final COTSTalonFXSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot
-        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L2);
+        //Update this based on the COTSTalonFXSwerveContstats.java file.  The layout is COTSTalonFXSwerveConstant.<vendor>.<module>.<motor>(COTSTalonFXSwerveConstant.<vendor>.<module>.<motor>.driveRatio.<CurrnetRobot Ratio of gears>)
+        COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.Falcon500(COTSTalonFXSwerveConstants.WCP.Falcon500.driveRatios.X1_10);
 
         /* Drivetrain Constants */
         public static final double trackWidth = Units.inchesToMeters(30); //TODO: This must be tuned to specific robot
