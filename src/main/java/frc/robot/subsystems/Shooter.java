@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.XboxController;
 public class Shooter {
     private CANSparkMax ShooterMotor1;
     private CANSparkMax ShooterMotor2;
-    private XboxController cXboxControllerontroller;
+    public XboxController cXboxControllerontroller;
 
-    private float AmpMultiplier = 0.2f; // THIS NEEDS TO BE CALIBRATED 
-    private float SpeakerMultiplier = 0.5f; // THIS NEEDS TO BE CALIBRATED 
+    private float AmpMultiplier = 0.14f; // THIS NEEDS TO BE CALIBRATED 
+    private float SpeakerMultiplier = 0.2f; // THIS NEEDS TO BE CALIBRATED 
     private float SetSpeed;
 
     public Shooter(int shooterMotor1, int shooterMotor2, int controller ){
@@ -30,7 +30,7 @@ public class Shooter {
 
             SetSpeed = AmpMultiplier;
 
-        ShooterMotor1.set(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis() * SetSpeed);
+        ShooterMotor1.set((cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
         ShooterMotor2.set(-(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
     }
 }

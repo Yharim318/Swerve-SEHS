@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -23,7 +27,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  private Shooter cShooter = new Shooter(30, 31, 0);
+  private Shooter cShooter = new Shooter(31, 32, 0);
+  private CANSparkMax intakeSparkMax = new CANSparkMax(33, MotorType.kBrushless);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -89,6 +94,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     cShooter.Shoot();
+    if (cShooter.cXboxControllerontroller.getRightBumper()){
+      intakeSparkMax.set(0.20);
+    }
+    else if (cShooter.cXboxControllerontroller.getLeftBumper()){
+      intakeSparkMax.set(-0.05);
+    }
+    intakeSparkMax.setIdleMode(IdleMode.kBrake);
   }
 
   @Override
