@@ -9,6 +9,8 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Shooter;
@@ -29,7 +31,10 @@ public class Robot extends TimedRobot {
 
   private Shooter cShooter = new Shooter(31, 32, 0);
   private CANSparkMax intakeSparkMax = new CANSparkMax(33, MotorType.kBrushless);
-
+  private static final String kDefaultAuto = "Default";
+  private static final String kCustomAuto = "My Auto";
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -39,6 +44,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
   }
 
   /**
@@ -68,13 +76,23 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    m_autoSelected = m_chooser.getSelected();
+    System.out.println("Auto selected: " + m_autoSelected);
+    switch (m_autoSelected) {
+      case kCustomAuto:
+        cShooter.Shoot();
+        break;
+      case kDefaultAuto:
+      default:
+        // Put default auto code here
+        break;
+    }
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
   }
-
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {}
@@ -95,7 +113,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     cShooter.Shoot();
     if (cShooter.cXboxControllerontroller.getRightBumper()){
-      intakeSparkMax.set(0.20);
+      intakeSparkMax.set(0.30);
     }
     else if (cShooter.cXboxControllerontroller.getLeftBumper()){
       intakeSparkMax.set(-0.05);
