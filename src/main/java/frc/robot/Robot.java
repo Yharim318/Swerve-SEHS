@@ -4,16 +4,14 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -29,8 +27,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  private Shooter cShooter = new Shooter(31, 32, 0);
-  private CANSparkMax intakeSparkMax = new CANSparkMax(33, MotorType.kBrushless);
+  private Shooter cShooter = new Shooter(31, 32, 1);
+  private Climber cClimber = new Climber(9, 10, 1);
+  private Intake cIntake = new Intake(32, 33, 34, 1);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
@@ -112,13 +111,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     cShooter.Shoot();
-    if (cShooter.cXboxControllerontroller.getRightBumper()){
-      intakeSparkMax.set(0.30);
-    }
-    else if (cShooter.cXboxControllerontroller.getLeftBumper()){
-      intakeSparkMax.set(-0.05);
-    }
-    intakeSparkMax.setIdleMode(IdleMode.kBrake);
+    cClimber.Climb();
+    cIntake.Move();
   }
 
   @Override
