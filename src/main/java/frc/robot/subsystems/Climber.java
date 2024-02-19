@@ -13,7 +13,9 @@ public class Climber {
         xbox = new XboxController(Xbox);
     }
     public void Climb(){
-        motor1.set(speed * xbox.getRightY());
-        motor2.set(speed * xbox.getRightY());
+        if (xbox.getRightBumper()){
+            motor1.set(speed);
+            motor2.set(speed);
+        }
     }
 }

@@ -9,8 +9,8 @@ public class Shooter {
     private CANSparkMax ShooterMotor2;
     public XboxController cXboxControllerontroller;
 
-    private float AmpMultiplier = 0.14f; // THIS NEEDS TO BE CALIBRATED 
-    private float SpeakerMultiplier = 0.2f; // THIS NEEDS TO BE CALIBRATED 
+    private float AmpMultiplier = 0.14f;
+    private float SpeakerMultiplier = 0.2f;
     private float SetSpeed;
 
     public Shooter(int shooterMotor1, int shooterMotor2, int controller ){

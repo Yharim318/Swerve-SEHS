@@ -5,25 +5,33 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Intake{
-  CANSparkMax spinnyMotor1;
-  CANSparkMax spinnyMotor2;
-  CANSparkMax flippyMotor;
-  XboxController sillyController;
-  float funnySpinSpeed = 0.3f;
-  float funnyFlipSpeed = 0.3f;
+  CANSparkMax intake1;
+  CANSparkMax intake2;
+  CANSparkMax intake3;
+  CANSparkMax rotate;
+  XboxController controller;
+  float Spin = 0.3f;
+  float Flip = 0.3f;
 
-  public Intake(int SpinnyMotor1, int SpinnyMotor2, int FlippyMotor, int SillyController) {
-    spinnyMotor1 = new CANSparkMax(SpinnyMotor1, MotorType.kBrushless);
-    spinnyMotor2 = new CANSparkMax(SpinnyMotor2, MotorType.kBrushless);
-    flippyMotor = new CANSparkMax(FlippyMotor, MotorType.kBrushless);
-    sillyController = new XboxController(SillyController);
+  public Intake(int Intake1, int Intake2, int Intake3, int Rotate, int Controller) {
+    intake1 = new CANSparkMax(Intake1, MotorType.kBrushless);
+    intake2 = new CANSparkMax(Intake2, MotorType.kBrushless);
+    intake3 = new CANSparkMax(Intake3, MotorType.kBrushless);
+    rotate = new CANSparkMax(Rotate, MotorType.kBrushless);
+    controller = new XboxController(Controller);
   }
 
   public void Move() {
-    flippyMotor.set(funnyFlipSpeed * (sillyController.getRightTriggerAxis() - sillyController.getLeftTriggerAxis()));
-    if (sillyController.getRightBumper()) {
-      spinnyMotor1.set(funnySpinSpeed);
-      spinnyMotor2.set(funnyFlipSpeed);
+    if (controller.getRightBumper()) {
+      rotate.set(Flip);
+    }
+    else if (controller.getLeftBumper()) {
+      rotate.set(-Flip);
+    }
+    if (controller.getAButton()) {
+      intake1.set(Spin);
+      intake2.set(Spin);
+      intake3.set(Spin);
     }
   }
 }

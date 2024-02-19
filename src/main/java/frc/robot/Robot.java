@@ -28,8 +28,8 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   private Shooter cShooter = new Shooter(31, 32, 1);
-  private Climber cClimber = new Climber(9, 10, 1);
-  private Intake cIntake = new Intake(32, 33, 34, 1);
+  private Climber cClimber = new Climber(9, 10, 0);
+  private Intake cIntake = new Intake(33, 34, 35, 36, 1);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
