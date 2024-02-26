@@ -22,6 +22,10 @@ public class Intake{
   }
 
   public void Move() {
+    rotate.set(0);
+    intake1.set(0);
+    intake2.set(0);
+    intake3.set(0);
     if (controller.getRightBumper()) {
       rotate.set(Flip);
     }
@@ -29,8 +33,8 @@ public class Intake{
       rotate.set(-Flip);
     }
     if (controller.getAButton()) {
-      intake1.set(Spin);
-      intake2.set(Spin);
+      intake1.set(-Spin);
+      intake2.set(-Spin);
       intake3.set(Spin);
     }
   }

@@ -25,11 +25,12 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
 
+  
   private RobotContainer m_robotContainer;
 
   private Shooter cShooter = new Shooter(31, 32, 33, 1);
-  private Climber cClimber = new Climber(9, 10, 0);
-  private Intake cIntake = new Intake(33, 34, 35, 36, 1);
+  private Climber cClimber = new Climber(37, 39, 0);
+  private Intake cIntake = new Intake(36, 35, 34, 33, 1);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
@@ -79,11 +80,11 @@ public class Robot extends TimedRobot {
     System.out.println("Auto selected: " + m_autoSelected);
     switch (m_autoSelected) {
       case kCustomAuto:
-        cShooter.Shoot();
+        //cShooter.Shoot();
         break;
       case kDefaultAuto:
       default:
-        // Put default auto code here
+        
         break;
     }
     
