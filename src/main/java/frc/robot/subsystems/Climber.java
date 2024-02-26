@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.SparkLimitSwitch.Type;
 
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -19,13 +18,15 @@ public class Climber {
         motor1.set(0);
         motor2.set(0);
         float fast = speed;
+        if (xbox.getAButton()){
+            fast = -fast;
+        }
         if (xbox.getRightBumper()){
             motor1.set(fast);
         }
         if (xbox.getLeftBumper()){
             motor2.set(fast);
         }
-        System.out.println(motor1.getForwardLimitSwitch(Type.kNormallyOpen));
 
     }
 }

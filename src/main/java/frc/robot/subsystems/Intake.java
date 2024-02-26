@@ -34,7 +34,7 @@ public class Intake{
     }
     if (controller.getAButton()) {
       intake1.set(-Spin);
-      intake2.set(-Spin);
+      intake2.set(-Spin-0.1);
       intake3.set(Spin);
     }
   }
