@@ -18,15 +18,16 @@ public class Climber {
         motor1.set(0);
         motor2.set(0);
         float fast = speed;
-        if (xbox.getAButton()){
-            fast = -fast;
+        if (xbox.getXButton()) {
+            if (xbox.getAButton()){
+                fast = -fast;
+            }
+            if (xbox.getRightBumper()){
+                motor1.set(fast);
+            }
+            if (xbox.getLeftBumper()){
+                motor2.set(fast);
+            }
         }
-        if (xbox.getRightBumper()){
-            motor1.set(fast);
-        }
-        if (xbox.getLeftBumper()){
-            motor2.set(fast);
-        }
-
     }
 }

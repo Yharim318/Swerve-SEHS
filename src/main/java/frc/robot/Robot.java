@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
 
   private Shooter cShooter = new Shooter(31, 32, 33, 1);
   private Climber cClimber = new Climber(37, 39, 0);
-  private Intake cIntake = new Intake(36, 35, 34, 33, 1);
+  private Intake cIntake = new Intake(36, 35, 34, 33, 38, 1);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
