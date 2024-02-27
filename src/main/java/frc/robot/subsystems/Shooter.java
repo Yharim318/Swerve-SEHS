@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public class Shooter {
     private CANSparkMax ShooterMotor1;
     private CANSparkMax ShooterMotor2;
-   // private CANSparkMax IntakeMotor;
+    // private CANSparkMax IntakeMotor;
     public XboxController cXboxControllerontroller;
 
     private float AmpMultiplier = 0.8f; //.14
