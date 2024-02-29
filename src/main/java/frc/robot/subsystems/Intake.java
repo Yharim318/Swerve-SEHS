@@ -8,8 +8,8 @@ public class Intake{
   CANSparkMax intake1;
   CANSparkMax intake2;
   CANSparkMax intake3;
-  CANSparkMax rotate1;
-  CANSparkMax rotate2;
+  public CANSparkMax rotate1;
+  public CANSparkMax rotate2;
   XboxController controller;
   float Spin = 0.3f;
   float Flip = 0.3f;
@@ -33,14 +33,14 @@ public class Intake{
       rotate1.set(Flip);
       rotate2.set(-Flip);
     }
-    else if (controller.getLeftBumper()) {
+    else if (controller.getLeftBumperPressed()) {
       rotate1.set(-Flip);
       rotate2.set(Flip);
     }
     if (controller.getAButton()) {
-      intake1.set(-Spin);
-      intake2.set(-Spin-0.1);
-      intake3.set(Spin);
+      intake1.set(-Spin-0.2);
+      intake2.set(-Spin-0.3);
+      intake3.set(Spin+0.2);
     }
   }
 }

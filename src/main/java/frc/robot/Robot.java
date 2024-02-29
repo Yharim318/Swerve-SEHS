@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
   
   private RobotContainer m_robotContainer;
 
+  private double autoTimer = 0.0f;
   private Shooter cShooter = new Shooter(31, 32, 33, 1);
   private Climber cClimber = new Climber(37, 39, 0);
   private Intake cIntake = new Intake(36, 35, 34, 33, 38, 1);
@@ -95,7 +96,15 @@ public class Robot extends TimedRobot {
   }
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    autoTimer += kDefaultPeriod;
+    cIntake.rotate1.set(0.1);
+    cIntake.rotate2.set(-0.1);
+    if (autoTimer > 4){
+      cShooter.ShooterMotor1.set(0.1);
+    }
+
+  }
 
   @Override
   public void teleopInit() {

@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Shooter {
-    private CANSparkMax ShooterMotor1;
+    public  CANSparkMax ShooterMotor1;
     private CANSparkMax ShooterMotor2;
     // private CANSparkMax IntakeMotor;
     public XboxController cXboxControllerontroller;
