@@ -48,4 +48,19 @@ public class Intake{
       intake3.set(-(Spin+0.2));
     }
   }
+  public void IntakeManual(double speed){
+    intake1.set(-(speed*1.5));
+    intake2.set(-(speed*1.5));
+    intake3.set(speed*1.5);
+  }
+  public void RotateManual(int direction){
+    if (direction > 0){
+      rotate1.set(0.3);
+      rotate2.set(0.3);
+    }
+    if (direction < 0){
+      rotate1.set(0.05);
+      rotate2.set(-0.05);
+    }
+  }
 }

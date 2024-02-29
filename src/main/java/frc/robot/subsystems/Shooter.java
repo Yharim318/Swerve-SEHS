@@ -5,8 +5,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Shooter {
-    public  CANSparkMax ShooterMotor1;
-    public CANSparkMax ShooterMotor2;
+    private  CANSparkMax ShooterMotor1;
+    private CANSparkMax ShooterMotor2;
     // private CANSparkMax IntakeMotor;
     public XboxController cXboxControllerontroller;
 
@@ -36,5 +36,9 @@ public class Shooter {
         ShooterMotor1.set((cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
         ShooterMotor2.set(-(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
         //IntakeMotor.set((cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
+    }
+        public void ShootManual(double speed){
+        ShooterMotor1.set(speed);
+        ShooterMotor2.set(speed);
     }
 }

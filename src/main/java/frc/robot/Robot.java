@@ -107,15 +107,14 @@ public class Robot extends TimedRobot {
       m_robotContainer.s_Swerve.drive(new Translation2d(-10, 0), 0, true, false);
     }
     if (autoTimer > 0.5 && autoTimer < 1.5){
-      cShooter.ShooterMotor1.set(0.2);
-      cShooter.ShooterMotor2.set(0.2);
-    }
-    else {
-      cShooter.ShooterMotor1.set(0);
-      cShooter.ShooterMotor2.set(0);
+      cShooter.ShootManual(0.2);
     }
     if (autoTimer > 1.5 && autoTimer < 4){
+      cShooter.ShootManual(0);
       m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+    }
+    if (autoTimer > 1.5 && autoTimer < 4){
+      
     }
     
   }
