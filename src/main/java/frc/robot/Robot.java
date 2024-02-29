@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -100,10 +101,13 @@ public class Robot extends TimedRobot {
     autoTimer += kDefaultPeriod;
     cIntake.rotate1.set(0.1);
     cIntake.rotate2.set(-0.1);
+    if (autoTimer > 0 && autoTimer < 4){
+      m_robotContainer.s_Swerve.drive(new Translation2d(1, 0), 0, true, true);
+    }
     if (autoTimer > 4){
       cShooter.ShooterMotor1.set(0.1);
     }
-
+    
   }
 
   @Override
