@@ -42,5 +42,10 @@ public class Intake{
       intake2.set(-Spin-0.3);
       intake3.set(Spin+0.2);
     }
+        if (controller.getBButton()) {
+      intake1.set(-(-Spin-0.2));
+      intake2.set(-(-Spin-0.3));
+      intake3.set(-(Spin+0.2));
+    }
   }
 }

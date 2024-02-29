@@ -93,6 +93,7 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
+      m_autonomousCommand.cancel();
     }
     autoTimer = 0;
   }
@@ -102,10 +103,10 @@ public class Robot extends TimedRobot {
     autoTimer += kDefaultPeriod;
     cIntake.rotate1.set(0.1);
     cIntake.rotate2.set(-0.1);
-    if (autoTimer > 0 && autoTimer < 4){
-      m_robotContainer.s_Swerve.drive(new Translation2d(1, 0), 0, true, true);
+    if (autoTimer > 0 && autoTimer < 0.5){
+      m_robotContainer.s_Swerve.drive(new Translation2d(-10, 0), 0, true, false);
     }
-    if (autoTimer > 4){
+    if (autoTimer > 0.5 && autoTimer < 1.5){
       cShooter.ShooterMotor1.set(0.2);
       cShooter.ShooterMotor2.set(0.2);
     }
@@ -113,7 +114,9 @@ public class Robot extends TimedRobot {
       cShooter.ShooterMotor1.set(0);
       cShooter.ShooterMotor2.set(0);
     }
-    
+    if (autoTimer > 1.5 && autoTimer < 4){
+      m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+    }
     
   }
 
