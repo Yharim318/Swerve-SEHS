@@ -94,6 +94,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+    autoTimer = 0;
   }
   /** This function is called periodically during autonomous. */
   @Override
@@ -105,8 +106,14 @@ public class Robot extends TimedRobot {
       m_robotContainer.s_Swerve.drive(new Translation2d(1, 0), 0, true, true);
     }
     if (autoTimer > 4){
-      cShooter.ShooterMotor1.set(0.1);
+      cShooter.ShooterMotor1.set(0.2);
+      cShooter.ShooterMotor2.set(0.2);
     }
+    else {
+      cShooter.ShooterMotor1.set(0);
+      cShooter.ShooterMotor2.set(0);
+    }
+    
     
   }
 

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class Shooter {
     public  CANSparkMax ShooterMotor1;
-    private CANSparkMax ShooterMotor2;
+    public CANSparkMax ShooterMotor2;
     // private CANSparkMax IntakeMotor;
     public XboxController cXboxControllerontroller;
 
