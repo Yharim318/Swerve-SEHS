@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -29,12 +30,20 @@ public class Robot extends TimedRobot {
   
   private RobotContainer m_robotContainer;
 
+  public int autoNumber = 0;
   private double autoTimer = 0.0f;
   private Shooter cShooter = new Shooter(31, 32, 33, 1);
   private Climber cClimber = new Climber(37, 39, 0);
-  private Intake cIntake = new Intake(36, 35, 34, 33, 38, 1);
+  private Intake cIntake = new Intake(36, 35, 34, 9, 33, 38, 1);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
+  private static final String kCustomAuto2 = "My Auto 2";
+  private static final String kCustomAuto3 = "My Auto 3";
+  private static final String kCustomAuto4 = "My Auto 4";
+  private static final String kCustomAuto5 = "My Auto 5";
+  private static final String kCustomAuto6 = "My Auto 6";
+  private static final String kCustomAuto7 = "My Auto 7";
+  private static final String kCustomAuto0 = "Do Nothing";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
@@ -46,8 +55,17 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
+    CameraServer.startAutomaticCapture();
+
+    m_chooser.setDefaultOption("Move Forward", kDefaultAuto);
+    m_chooser.addOption("Diagonal Start Right Red", kCustomAuto);
+    m_chooser.addOption("Diagonal Start Left Red", kCustomAuto4);
+    m_chooser.addOption("Back, Shoot, Forward", kCustomAuto2);
+    m_chooser.addOption("Diagonal Start Left Blue", kCustomAuto5);
+    m_chooser.addOption("Diagonal Start Right Blue", kCustomAuto6);
+    m_chooser.addOption("Shoot and Move", kCustomAuto7);
+    m_chooser.addOption("Middle Shoot, Wait, Strafe, forward", kCustomAuto3);
+    m_chooser.addOption("Do Nothing", kCustomAuto0);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
@@ -82,12 +100,34 @@ public class Robot extends TimedRobot {
     System.out.println("Auto selected: " + m_autoSelected);
     switch (m_autoSelected) {
       case kCustomAuto:
-        //cShooter.Shoot();
+        autoNumber = 1;
         break;
+      case kCustomAuto2:
+       autoNumber = 2;
+       break;
+      case kCustomAuto3:
+       autoNumber = 3;
+       break;
+      case kCustomAuto4:
+       autoNumber = 4;
+       break;
+      case kCustomAuto5:
+       autoNumber = 5;
+       break;
+      case kCustomAuto6:
+       autoNumber = 6;
+       break;
+      case kCustomAuto7:
+       autoNumber = 7;
+       break;
+      case kCustomAuto0:
+       autoNumber = -1;
+       break;
       case kDefaultAuto:
       default:
-        
+        autoNumber = 0;
         break;
+
     }
     
     // schedule the autonomous command (example)
@@ -100,23 +140,175 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+
+    // TODO: Work on changing to a more proper solution in the future
+
     autoTimer += kDefaultPeriod;
-    cIntake.rotate1.set(0.1);
-    cIntake.rotate2.set(-0.1);
-    if (autoTimer > 0 && autoTimer < 0.5){
-      m_robotContainer.s_Swerve.drive(new Translation2d(-10, 0), 0, true, false);
+
+    // Move Forward
+
+    if (autoNumber == 0){
+      if (autoTimer < 2.2 ){
+        m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+      }
     }
-    if (autoTimer > 0.5 && autoTimer < 1.5){
-      cShooter.ShootManual(0.2);
+
+    // Shoot and Move
+
+    if (autoNumber == 7){
+      if (autoTimer < 1){
+        cShooter.ShootManual(0.8);
+      }
+      if (autoTimer > 1 && autoTimer < 2.2){
+        cIntake.ShooterIntake();
+      }
+      if (autoTimer > 2.2 && autoTimer < 2.7){
+        cIntake.IntakeManualStop();
+        cShooter.ShootManual(0);
+        m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+      }
     }
-    if (autoTimer > 1.5 && autoTimer < 4){
-      cShooter.ShootManual(0);
-      m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+
+    // Right Diagonal Red
+
+    if (autoNumber == 1){
+      if (autoTimer < 2) {
+        m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), -0.4, true, false);
+      }
+      if (autoTimer > 2 && autoTimer < 2.2){  
+        m_robotContainer.s_Swerve.drive(new Translation2d(0,10),0, true, false);
+      }
+      if (autoTimer > 2.2 && autoTimer < 3){
+        cShooter.ShootManual(0.8);
+      }
+      if(autoTimer > 3 && autoTimer < 3.1){
+        cIntake.ShooterIntake();
+      }
+      if (autoTimer > 3.1 && autoTimer < 3.3){
+        cIntake.IntakeManualStop();
+        cShooter.ShootManual(0);
+        m_robotContainer.s_Swerve.drive(new Translation2d(0,-10),0, true, false);
+      }
+      if (autoTimer > 3.3 && autoTimer < 5.3){
+        m_robotContainer.s_Swerve.drive(new Translation2d(10,0),0, true, false);
+      }
     }
-    if (autoTimer > 1.5 && autoTimer < 4){
-      
+
+    // Left Diagonal Red
+
+    if (autoNumber == 4){
+      if (autoTimer < 2) {
+        m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), -0.4, true, false);
+      }
+      if (autoTimer > 2 && autoTimer < 2.2){  
+        m_robotContainer.s_Swerve.drive(new Translation2d(0,-10),0, true, false);
+      }
+      if (autoTimer > 2.2 && autoTimer < 3){
+        cShooter.ShootManual(0.8);
+      }
+      if(autoTimer > 3 && autoTimer < 3.1){
+        cIntake.ShooterIntake();
+      }
+      if (autoTimer > 3.1 && autoTimer < 3.8){
+        cIntake.IntakeManualStop();
+        cShooter.ShootManual(0);
+        m_robotContainer.s_Swerve.drive(new Translation2d(0,10),0, true, false);
+      }
+      if (autoTimer > 3.8 && autoTimer < 5.8){
+        m_robotContainer.s_Swerve.drive(new Translation2d(10,0),0, true, false);
+      }
     }
-    
+// Right Diagonal Blue
+
+    if (autoNumber == 6){
+      if (autoTimer < 2) {
+        m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), -0.4, true, false);
+      }
+      if (autoTimer > 2 && autoTimer < 2.2){  
+        m_robotContainer.s_Swerve.drive(new Translation2d(0,10),0, true, false);
+      }
+      if (autoTimer > 2.2 && autoTimer < 3){
+        cShooter.ShootManual(0.8);
+      }
+      if(autoTimer > 3 && autoTimer < 3.1){
+        cIntake.ShooterIntake();
+      }
+      if (autoTimer > 3.1 && autoTimer < 3.8){
+        cIntake.IntakeManualStop();
+        cShooter.ShootManual(0);
+        m_robotContainer.s_Swerve.drive(new Translation2d(0,-10),0, true, false);
+      }
+      if (autoTimer > 3.8 && autoTimer < 5.8){
+        m_robotContainer.s_Swerve.drive(new Translation2d(10,0),0, true, false);
+      }
+    }
+// Left Diagonal Blue
+
+    if (autoNumber == 1){
+      if (autoTimer < 2) {
+        m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), 0.4, true, false);
+      }
+      if (autoTimer > 2 && autoTimer < 2.2){  
+        m_robotContainer.s_Swerve.drive(new Translation2d(0,-10),0, true, false);
+      }
+      if (autoTimer > 2.2 && autoTimer < 3){
+        cShooter.ShootManual(0.8);
+      }
+      if(autoTimer > 3 && autoTimer < 3.1){
+        cIntake.ShooterIntake();
+      }
+      if (autoTimer > 3.1 && autoTimer < 3.3){
+        cIntake.IntakeManualStop();
+        cShooter.ShootManual(0);
+        m_robotContainer.s_Swerve.drive(new Translation2d(0,10),0, true, false);
+      }
+      if (autoTimer > 3.3 && autoTimer < 5.3){
+        m_robotContainer.s_Swerve.drive(new Translation2d(10,0),0, true, false);
+      }
+    }
+
+    // Shoot, Wait, Strafe, Forward (Right)
+
+    if (autoNumber == 3){
+      if (autoTimer > 0 && autoTimer < 0.75){
+        cShooter.ShootManual(0.8);
+      }
+      if (autoTimer > 0.75 && autoTimer < 2){
+        cIntake.ShooterIntake();
+      }
+      if (autoTimer > 2 && autoTimer < 2.1){
+        cShooter.ShootManual(0);
+        cIntake.IntakeManualStop();
+      }
+      if (autoTimer > 5 && autoTimer < 6){
+         m_robotContainer.s_Swerve.drive(new Translation2d(0, 10), 0, true, false);
+      }
+      if (autoTimer > 6 && autoTimer < 8.5){
+         m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+      }
+    }
+
+    // Shoot, Wait, Strafe, Forward (Left)
+
+    if (autoNumber == 3){
+      if (autoTimer > 0 && autoTimer < 0.75){
+        cShooter.ShootManual(0.8);
+      }
+      if (autoTimer > 0.75 && autoTimer < 2){
+        cShooter.ShootManual(0.8);
+        cIntake.ShooterIntake();
+      }
+      if (autoTimer > 2 && autoTimer < 2.1){
+        cShooter.ShootManual(0);
+        cIntake.IntakeManualStop();
+      }
+      if (autoTimer > 5 && autoTimer < 6){
+         m_robotContainer.s_Swerve.drive(new Translation2d(0, -10), 0, true, false);
+      }
+      if (autoTimer > 6 && autoTimer < 8.5){
+         m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+      }
+    }
   }
 
   @Override

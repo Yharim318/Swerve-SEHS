@@ -39,6 +39,6 @@ public class Shooter {
     }
         public void ShootManual(double speed){
         ShooterMotor1.set(speed);
-        ShooterMotor2.set(speed);
+        ShooterMotor2.set(-speed);
     }
 }

@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Climber {
-    private float speed = 0.5f;
+    private float speed = 1.0f;
     private CANSparkMax motor1;
     private CANSparkMax motor2;
     private XboxController xbox;
@@ -18,16 +18,16 @@ public class Climber {
         motor1.set(0);
         motor2.set(0);
         float fast = speed;
+        
+        if (xbox.getAButton()){
+            fast = -fast;
+        }        
+        float slow = fast / 10;
         if (xbox.getXButton()) {
-            if (xbox.getAButton()){
-                fast = -fast;
-            }
-            if (xbox.getRightBumper()){
-                motor1.set(fast);
-            }
-            if (xbox.getLeftBumper()){
-                motor2.set(fast);
-            }
+            fast = slow;
         }
+        motor1.set(-(fast * xbox.getRightTriggerAxis()));
+        motor2.set((fast * xbox.getLeftTriggerAxis()));
+        
     }
 }
