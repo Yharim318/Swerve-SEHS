@@ -22,11 +22,21 @@ public class Intake{
     IntakeMotor1.setIdleMode(IdleMode.kBrake);
     IntakeMotor2.setIdleMode(IdleMode.kBrake);
   }
-  public void take(){
+  public void Move(){
+    IntakeMotor1.set(0);
+    IntakeMotor2.set(0);
     if (cXboxController.getAButton()){
       IntakeMotor1.set(speed);
       IntakeMotor2.set(speed);
     }
+  }
+  public void Start(){
+    IntakeMotor1.set(speed);
+    IntakeMotor2.set(speed);
+  }
+  public void Stop(){
+    IntakeMotor1.set(0);
+    IntakeMotor2.set(0);
   }
 }
 
