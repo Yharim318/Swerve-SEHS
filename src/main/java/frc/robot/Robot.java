@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,7 +34,7 @@ public class Robot extends TimedRobot {
   private double autoTimer = 0.0f;
   private Shooter cShooter = new Shooter(31, 32, 33, 1);
   private Climber cClimber = new Climber(37, 39, 0);
-  private Intake cIntake = new Intake(36, 35, 34, 9, 33, 38, 1);
+  private Intake cIntake = new Intake(34, 35, 1);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private static final String kCustomAuto2 = "My Auto 2";
@@ -164,7 +163,6 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     cShooter.Shoot();
     cClimber.Climb();
-    cIntake.Move();
   }
 
   @Override

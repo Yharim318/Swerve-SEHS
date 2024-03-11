@@ -23,10 +23,10 @@ public class AutosTimer {
         cShooter.ShootManual(0.8);
       }
       if (autoTimer > 1 && autoTimer < 2.2){
-        cIntake.ShooterIntake();
+        // Intake
       }
       if (autoTimer > 2.2 && autoTimer < 2.7){
-        cIntake.IntakeManualStop();
+        // Intake
         cShooter.ShootManual(0);
         m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
       }
@@ -56,7 +56,7 @@ public class AutosTimer {
     if (autoNumber == 3){
         if (autoTimer < 1){
             cShooter.ShootManual(0.8);
-        }
+        }   
         if (autoTimer > 1 && autoTimer < 2){
             cShooter.ShootManual(0);
             m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
@@ -90,7 +90,7 @@ public class AutosTimer {
             m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
         }
     }
-    //Blue left 
+    //Blue left 3 piece and leave
     if (autoNumber == 4){
         if (autoTimer < 1){
             m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), 0.8, true, false); //TODO: rotation?
@@ -98,7 +98,81 @@ public class AutosTimer {
         if (autoTimer > 1 && autoTimer < 2){
             cShooter.ShootManual(0.8);
         }
-        if (autoTimer > 2 && autoTimer < 3);
+        if (autoTimer > 2 && autoTimer < 3){
+            cShooter.ShootManual(0);
+            m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), 0.8, true, false); //TODO: rotation
+        }
+        if (autoTimer > 3 && autoTimer < 3.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(0, 10), 0, true, false);
+        }
+        if (autoTimer > 3.5 && autoTimer < 4.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+            //intake
+        }
+        if (autoTimer > 4.5 && autoTimer < 5.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(-10, 0), 0, true, false);
+        }
+        if (autoTimer > 5.5 && autoTimer < 6.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(0, -10), 0, true, false);
+        }
+        if (autoTimer > 6.5 && autoTimer < 7.5){
+            cShooter.ShootManual(0.8);
+        }
+        if (autoTimer > 7.5 && autoTimer < 8.5){
+            cShooter.ShootManual(0);
+            m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+            //intake
+        }
+        if (autoTimer > 8.5 && autoTimer < 9.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(-10, 0), 0, true, false);
+        }
+        if (autoTimer > 9.5 && autoTimer < 10.5){
+            cShooter.ShootManual(0.8);
+        }
+        if (autoTimer > 10.5 && autoTimer < 11.5){
+            cShooter.ShootManual(0);
+            m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+        }
+    }
+    //Right blue 
+    if (autoNumber == 5){
+        if (autoTimer < 1){
+             m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), 0.8, true, false); //TODO: rotation?
+        }
+        if (autoTimer > 1 && autoTimer < 2){
+            cShooter.ShootManual(0.8);
+        }
+        if (autoTimer > 2 && autoTimer < 3){
+            cShooter.ShootManual(0);
+            m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), 0.8, true, false); //TODO: rotation?
+        }
+        if (autoTimer > 3 && autoTimer < 4.2){
+            m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false); 
+            //intake
+        }
+        if (autoTimer > 4.2 && autoTimer < 5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(-10, 0), 0, true, false); 
+        }
+        if (autoTimer > 5 && autoTimer < 5.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(0, 10), 0, true, false); 
+        }
+        if (autoTimer > 5.5 && autoTimer < 6.5){
+            cShooter.ShootManual(0.8);
+        }
+        if (autoTimer > 6.5 && autoTimer < 7.5){
+            cShooter.ShootManual(0);
+            m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false); 
+             //intake
+        }
+        if (autoTimer > 7.5 && autoTimer < 8.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(-10, 0), 0, true, false); 
+        }
+        if (autoTimer > 8.5 && autoTimer < 9.5){
+            cShooter.ShootManual(0.8);
+        }
+        if (autoTimer > 9.5 && autoTimer > 10.5){
+            //do
+        }
     }
 }
 }
