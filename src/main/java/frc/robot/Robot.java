@@ -33,8 +33,8 @@ public class Robot extends TimedRobot {
   public int autoNumber = 0;
   private double autoTimer = 0.0f;
   private Shooter cShooter = new Shooter(31, 32, 33, 1);
-  private Climber cClimber = new Climber(37, 39, 0);
-  private Intake cIntake = new Intake(34, 35, 1);
+  private Climber cClimber = new Climber(38, 39, 0);
+  private Intake cIntake = new Intake(34, 35, 36, 1);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private static final String kCustomAuto2 = "My Auto 2";
@@ -58,13 +58,7 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
 
     m_chooser.setDefaultOption("Move Forward", kDefaultAuto);
-    m_chooser.addOption("Diagonal Start Right Red", kCustomAuto);
-    m_chooser.addOption("Diagonal Start Left Red", kCustomAuto4);
-    m_chooser.addOption("Back, Shoot, Forward", kCustomAuto2);
-    m_chooser.addOption("Diagonal Start Left Blue", kCustomAuto5);
-    m_chooser.addOption("Diagonal Start Right Blue", kCustomAuto6);
-    m_chooser.addOption("Shoot and Move", kCustomAuto7);
-    m_chooser.addOption("Middle Shoot, Wait, Strafe, forward", kCustomAuto3);
+    m_chooser.addOption("Shoot and Move", kCustomAuto);
     m_chooser.addOption("Do Nothing", kCustomAuto0);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
@@ -163,6 +157,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     cShooter.Shoot();
     cClimber.Climb();
+    cIntake.Move();
   }
 
   @Override

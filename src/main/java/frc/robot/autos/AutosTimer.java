@@ -1,11 +1,13 @@
 package frc.robot.autos;
-
 import edu.wpi.first.math.geometry.Translation2d;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
 public class AutosTimer {
+
+    public float meter;
+
     public static void Start(int autoNumber, double autoTimer, RobotContainer m_robotContainer, Shooter cShooter, Intake cIntake){
 
     // Move Forward
@@ -18,7 +20,7 @@ public class AutosTimer {
 
     // Shoot and Move
 
-    if (autoNumber == 7){
+    if (autoNumber == 1){
       if (autoTimer < 1){
         cShooter.ShootManual(0.8);
       }
