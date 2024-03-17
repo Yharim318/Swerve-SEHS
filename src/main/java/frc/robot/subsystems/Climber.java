@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Climber {
-    private float speed = 1.0f;
+    private float speed = 0.3f;
     private CANSparkMax motor1;
     private CANSparkMax motor2;
     private XboxController xbox;

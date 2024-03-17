@@ -5,12 +5,14 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.SillyGuy;
 import frc.robot.autos.AutosTimer;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
@@ -35,6 +37,7 @@ public class Robot extends TimedRobot {
   private Shooter cShooter = new Shooter(31, 32, 33, 1);
   private Climber cClimber = new Climber(38, 39, 0);
   private Intake cIntake = new Intake(34, 35, 36, 1);
+  private SillyGuy cSillyGuy = new SillyGuy(36, 1);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private static final String kCustomAuto2 = "My Auto 2";
@@ -60,6 +63,10 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Move Forward", kDefaultAuto);
     m_chooser.addOption("Shoot and Move", kCustomAuto);
     m_chooser.addOption("Do Nothing", kCustomAuto0);
+    m_chooser.addOption("Middle 2 and leave", kCustomAuto2);
+    m_chooser.addOption("Blue Middle 3 and leave", kCustomAuto3);
+    m_chooser.addOption("Blue Left 3 and leave", kCustomAuto4);
+     m_chooser.addOption("Right 3 and leave", kCustomAuto5);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
@@ -89,6 +96,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), 0, false, false);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     m_autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + m_autoSelected);
@@ -158,6 +166,7 @@ public class Robot extends TimedRobot {
     cShooter.Shoot();
     cClimber.Climb();
     cIntake.Move();
+    cSillyGuy.Vroom(cIntake.getSpeed());
   }
 
   @Override

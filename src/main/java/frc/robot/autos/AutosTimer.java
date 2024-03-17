@@ -6,14 +6,14 @@ import frc.robot.subsystems.Shooter;
 
 public class AutosTimer {
 
-    public float meter;
+    public static float meter = 0.6f;
 
     public static void Start(int autoNumber, double autoTimer, RobotContainer m_robotContainer, Shooter cShooter, Intake cIntake){
 
     // Move Forward
 
     if (autoNumber == 0){
-      if (autoTimer < 2.2 ){
+      if (autoTimer < meter ){
         m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
       }
     }
@@ -38,21 +38,28 @@ public class AutosTimer {
         if (autoTimer < 1){
             cShooter.ShootManual(0.8);
         }
-        if (autoTimer > 1 && autoTimer < 2){
-            cShooter.ShootManual(0);
-            m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+        if (autoTimer > 1 && autoTimer < 1.5){
             cIntake.Start();
         }
-        if (autoTimer > 2 && autoTimer < 3){
-             m_robotContainer.s_Swerve.drive(new Translation2d(-10, 0), 0, true, false);
-             cIntake.Stop();
-        }
-        if (autoTimer > 3 && autoTimer < 4){
-            cShooter.ShootManual(0.8);
-        }
-        if (autoTimer > 4 && autoTimer < 4.5){
+        if (autoTimer > 1.5 && autoTimer < 2.3){
+            m_robotContainer.s_Swerve.drive(new Translation2d(3, 0), 0, true, false);
             cShooter.ShootManual(0);
-            m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+        }
+
+        if (autoTimer > 2.8 && autoTimer < 3.6){
+            m_robotContainer.s_Swerve.drive(new Translation2d(-3, 0), 0, true, false);
+            cIntake.Stop();
+        }
+        if (autoTimer > 3.7 && autoTimer < 4.4){
+            cShooter.ShootManual(1);
+        }
+        if (autoTimer > 4.6 && autoTimer < 5){
+            cIntake.Start();
+        }
+        if (autoTimer > 5 && autoTimer < 5.8){
+            cShooter.ShootManual(0);
+            cIntake.Stop();
+            m_robotContainer.s_Swerve.drive(new Translation2d(3, 0), 0, true, false);
         }
     }
     //Blue Middle 3 piece and leave
@@ -181,8 +188,8 @@ public class AutosTimer {
         }
         if (autoTimer > 9.5 && autoTimer > 10.5){
             //do
+        
         }
     }
 }
 }
-
