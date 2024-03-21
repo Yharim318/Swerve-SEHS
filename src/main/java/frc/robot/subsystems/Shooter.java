@@ -10,7 +10,7 @@ public class Shooter {
     // private CANSparkMax IntakeMotor;
     public XboxController cXboxControllerontroller;
 
-    private float AmpMultiplier = 0.8f; //.14
+    private float AmpMultiplier = 0.7f; //.14
     private float SpeakerMultiplier = 0.8f;
     private float SetSpeed;
 

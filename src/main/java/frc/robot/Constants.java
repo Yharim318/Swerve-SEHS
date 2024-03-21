@@ -13,7 +13,7 @@ import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
-    public static final double stickDeadband = 0.1;
+    public static final double stickDeadband = 0.02;
 
     public static final class Swerve {
         public static final int pigeonID = 40;
@@ -78,7 +78,7 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 4.5; 
+        public static final double maxSpeed = 9; 
         /** Radians per Second */
         public static final double maxAngularVelocity = 3 * Math.PI; //TODO: This must be tuned to specific robot
 

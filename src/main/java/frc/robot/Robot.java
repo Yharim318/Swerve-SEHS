@@ -146,7 +146,7 @@ public class Robot extends TimedRobot {
     // TODO: Work on changing to a more proper solution in the future
 
     autoTimer += kDefaultPeriod;
-    AutosTimer.Start(autoNumber, autoTimer, m_robotContainer, cShooter, cIntake);
+    AutosTimer.Start(autoNumber, autoTimer, m_robotContainer, cShooter, cIntake, cSillyGuy);
   }
 
   @Override
