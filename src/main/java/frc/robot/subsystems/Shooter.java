@@ -5,37 +5,25 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Shooter {
-    private  CANSparkMax ShooterMotor1;
-    private CANSparkMax ShooterMotor2;
-    // private CANSparkMax IntakeMotor;
-    public XboxController cXboxControllerontroller;
+    private final CANSparkMax ShooterMotor1;
+    private final CANSparkMax ShooterMotor2;
+    public XboxController WackyController;
 
-    private float AmpMultiplier = 0.7f; //.14
-    private float SpeakerMultiplier = 0.8f;
-    private float SetSpeed;
+    private static final float SetSpeed = 0.95f;
 
-    public Shooter(int shooterMotor1, int shooterMotor2, int intakeMotor, int controller ){
+    public Shooter(int shooterMotor1, int shooterMotor2, int controller ){
         ShooterMotor1 = new CANSparkMax(shooterMotor1, MotorType.kBrushless);
         ShooterMotor2 = new CANSparkMax(shooterMotor2, MotorType.kBrushless);
-        //IntakeMotor = new CANSparkMax(intakeMotor, MotorType.kBrushless);
         
-        cXboxControllerontroller = new XboxController(controller);
+        WackyController = new XboxController(controller);
 
         ShooterMotor1.setIdleMode(IdleMode.kBrake);
         ShooterMotor2.setIdleMode(IdleMode.kBrake);
+        ShooterMotor2.setInverted(true);
     }
     public void Shoot(){
-        if (cXboxControllerontroller.getYButton())
-
-            SetSpeed = SpeakerMultiplier;
-            
-        else 
-
-            SetSpeed = AmpMultiplier;
-
-        ShooterMotor1.set((cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
-        ShooterMotor2.set(-(cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
-        //IntakeMotor.set((cXboxControllerontroller.getRightTriggerAxis() - cXboxControllerontroller.getLeftTriggerAxis()) * SetSpeed);
+        ShooterMotor1.set((WackyController.getRightTriggerAxis() - WackyController.getLeftTriggerAxis()) * SetSpeed);
+        ShooterMotor2.set((WackyController.getRightTriggerAxis() - WackyController.getLeftTriggerAxis()) * SetSpeed);
     }
         public void ShootManual(double speed){
         ShooterMotor1.set(speed);
