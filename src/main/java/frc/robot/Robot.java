@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
 
   public int autoNumber = 0;
   private double autoTimer = 0.0f;
-  private Shooter cShooter = new Shooter(31, 32, 33, 1);
+  private Shooter cShooter = new Shooter(31, 32, 1);
   private Climber cClimber = new Climber(38, 39, 0);
   private Intake cIntake = new Intake(34, 35, 36, 1);
   private SillyGuy cSillyGuy = new SillyGuy(36, 1);
