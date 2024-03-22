@@ -13,7 +13,7 @@ import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
-    public static final double stickDeadband = 0.1;
+    public static final double stickDeadband = 0.02;
 
     public static final class Swerve {
         public static final int pigeonID = 40;
@@ -78,7 +78,7 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 9; 
         /** Radians per Second */
         public static final double maxAngularVelocity = 3 * Math.PI; //TODO: This must be tuned to specific robot
 
@@ -112,7 +112,7 @@ public final class Constants {
             public static final int driveMotorID = 2;
             public static final int angleMotorID = 1;
             public static final int canCoderID = 21;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(135);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(137);// og number 135
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -122,7 +122,7 @@ public final class Constants {
             public static final int driveMotorID = 8;
             public static final int angleMotorID = 7;
             public static final int canCoderID = 24;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(246);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(245);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

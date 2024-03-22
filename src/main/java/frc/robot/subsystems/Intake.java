@@ -1,46 +1,60 @@
 package frc.robot.subsystems;
+
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Intake{
-  CANSparkMax intake1;
-  CANSparkMax intake2;
-  CANSparkMax intake3;
-  public CANSparkMax rotate1;
-  public CANSparkMax rotate2;
-  XboxController controller;
-  float Spin = 0.3f;
-  float Flip = 0.3f;
+  private CANSparkMax IntakeMotor1;
+  private CANSparkMax IntakeMotor2;
+  //private CANSparkMax IntakeMotor3;
+  public XboxController cXboxController;
+  float speed = 0.4f;
 
-  public Intake(int Intake1, int Intake2, int Intake3, int Rotate1, int Rotate2, int Controller) {
-    intake1 = new CANSparkMax(Intake1, MotorType.kBrushless);
-    intake2 = new CANSparkMax(Intake2, MotorType.kBrushless);
-    intake3 = new CANSparkMax(Intake3, MotorType.kBrushless);
-    rotate1 = new CANSparkMax(Rotate1, MotorType.kBrushless);
-    rotate2 = new CANSparkMax(Rotate2, MotorType.kBrushless);
-    controller = new XboxController(Controller);
+  public float getSpeed(){
+    return speed;
   }
+  public Intake(int intakemotor1, int intakemotor2, int intakeMotor3, int controller ){
+    IntakeMotor1 = new CANSparkMax(intakemotor1, MotorType.kBrushless);
+    IntakeMotor2 = new CANSparkMax(intakemotor2, MotorType.kBrushless);
+    //IntakeMotor3 = new CANSparkMax(intakeMotor3, MotorType.kBrushless);
+    IntakeMotor2.setInverted(false);
+    IntakeMotor1.setInverted(false);
+    //IntakeMotor3.setInverted(true);
 
-  public void Move() {
-    rotate1.set(0);
-    rotate2.set(0);
-    intake1.set(0);
-    intake2.set(0);
-    intake3.set(0);
-    if (controller.getRightBumper()) {
-      rotate1.set(Flip);
-      rotate2.set(-Flip);
+    cXboxController = new XboxController(controller);
+
+    IntakeMotor1.setIdleMode(IdleMode.kBrake);
+    IntakeMotor2.setIdleMode(IdleMode.kBrake);
+    //IntakeMotor3.setIdleMode(IdleMode.kBrake);
+  }
+  public void Move(){
+    IntakeMotor1.set(0);
+    IntakeMotor2.set(0);
+    //IntakeMotor3.set(0);
+    if (cXboxController.getAButton()){
+      IntakeMotor1.set(speed);
+      IntakeMotor2.set(speed);
+      //IntakeMotor3.set(speed);
     }
-    else if (controller.getLeftBumperPressed()) {
-      rotate1.set(-Flip);
-      rotate2.set(Flip);
+    else if (cXboxController.getBButton()){
+      IntakeMotor1.set(-speed);
+      IntakeMotor2.set(-speed);
+      //IntakeMotor3.set(-speed);
     }
-    if (controller.getAButton()) {
-      intake1.set(-Spin-0.2);
-      intake2.set(-Spin-0.3);
-      intake3.set(Spin+0.2);
-    }
+  }
+  public void Start(){
+    IntakeMotor1.set(speed);
+    IntakeMotor2.set(speed);
+    //IntakeMotor3.set(speed);
+  }
+  public void Stop(){
+    IntakeMotor1.set(0);
+    IntakeMotor2.set(0);
+    //IntakeMotor3.set(0);
   }
 }
+
+
