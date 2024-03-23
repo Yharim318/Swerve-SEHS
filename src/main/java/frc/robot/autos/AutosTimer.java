@@ -206,5 +206,55 @@ public class AutosTimer {
             cShooter.ShootManual(0.0);
         }
     }
+    //Red Middle 3 piece
+      if (autoNumber == 6){
+        if (autoTimer < 1){
+            cShooter.ShootManual(1);
+        }   
+        if (autoTimer > 1 && autoTimer < 1.5){
+            cSillyGuy.SillyVroom(cIntake.getSpeed());
+        }
+        if (autoTimer > 1.5 && autoTimer < 2.3){
+            m_robotContainer.s_Swerve.drive(new Translation2d(3, 0), 0, true, false);
+            cShooter.ShootManual(0);
+            cSillyGuy.SillyVroom(0);
+            cIntake.Start();
+        }
+        if (autoTimer > 2.8 && autoTimer < 3.6){
+            m_robotContainer.s_Swerve.drive(new Translation2d(-3, 0), 0, true, false);
+            cIntake.Stop();
+            cSillyGuy.SillyVroom(-cIntake.getSpeed());
+        }
+        if (autoTimer > 3.7 && autoTimer < 4.4){
+            cShooter.ShootManual(1);
+        }
+        if (autoTimer > 4.6 && autoTimer < 5){
+            cSillyGuy.SillyVroom(cIntake.getSpeed());
+        }
+        if (autoTimer > 5 && autoTimer < 5.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(0, -3), 0, true, false);
+        }
+        if (autoTimer > 5.5 && autoTimer < 6.3){
+            m_robotContainer.s_Swerve.drive(new Translation2d(3, 0), 0, true, false);
+            cIntake.Start();
+        }
+        if (autoTimer > 6.3 && autoTimer < 6.8){
+            m_robotContainer.s_Swerve.drive(new Translation2d(0, 3), 0, true, false);
+            cIntake.Stop();
+            cSillyGuy.SillyVroom(-cIntake.getSpeed());
+        }
+        if (autoTimer > 6.8 && autoTimer < 7.6){
+           m_robotContainer.s_Swerve.drive(new Translation2d(-3, 0), 0, true, false);
+        }
+        if (autoTimer > 7.6 && autoTimer < 8){
+            cShooter.ShootManual(1);
+            cSillyGuy.SillyVroom(cIntake.getSpeed());
+        }
+        if (autoTimer > 8 && autoTimer < 8.5){
+            m_robotContainer.s_Swerve.drive(new Translation2d(3, 0), 0, true, false);
+            cShooter.ShootManual(0);
+            cSillyGuy.SillyVroom(0);
+        }
+    } 
 }
 }
