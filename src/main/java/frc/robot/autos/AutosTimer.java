@@ -1,5 +1,4 @@
 package frc.robot.autos;
-import org.opencv.core.CvException;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import frc.robot.RobotContainer;
@@ -30,11 +29,11 @@ public class AutosTimer {
       if (autoTimer > 1 && autoTimer < 2.2){
         cSillyGuy.SillyVroom(cIntake.getSpeed());
       }
-      if (autoTimer > 2.2 && autoTimer < 2.7){
-        cSillyGuy.SillyVroom(0);
-        cShooter.ShootManual(0);
-        m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
-      }
+    //   if (autoTimer > 2.2 && autoTimer < 2.7){
+    //     cSillyGuy.SillyVroom(0);
+    //     cShooter.ShootManual(0);
+    //     m_robotContainer.s_Swerve.drive(new Translation2d(10, 0), 0, true, false);
+    //   }
     }
     //Middle 2 piece and leave
     if (autoNumber == 2){

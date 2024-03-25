@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
 
     m_chooser.setDefaultOption("Move Forward", kDefaultAuto);
-    m_chooser.addOption("Shoot and Move", kCustomAuto);
+    m_chooser.addOption("Shoot", kCustomAuto);
     m_chooser.addOption("Do Nothing", kCustomAuto0);
     m_chooser.addOption("Middle 2 and leave", kCustomAuto2);
     m_chooser.addOption("Blue Middle 3 and leave", kCustomAuto3);
@@ -146,7 +146,10 @@ public class Robot extends TimedRobot {
     // TODO: Work on changing to a more proper solution in the future
 
     autoTimer += kDefaultPeriod;
-    AutosTimer.Start(autoNumber, autoTimer, m_robotContainer, cShooter, cIntake, cSillyGuy);
+        cShooter.ShootManual(0.8);
+      if (autoTimer > 2.5 && autoTimer < 3.7){
+        cSillyGuy.SillyVroom(cIntake.getSpeed());
+      }
   }
 
   @Override
