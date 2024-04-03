@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -28,6 +30,7 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton xMode = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
@@ -58,6 +61,15 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+
+        xMode.whileTrue(s_Swerve.run(() -> {
+            s_Swerve.setModuleStates(new SwerveModuleState[]{
+                new SwerveModuleState(0.0, Rotation2d.fromDegrees(45)),
+                new SwerveModuleState(0.0, Rotation2d.fromDegrees(-45)),
+                new SwerveModuleState(0.0, Rotation2d.fromDegrees(-45)),
+                new SwerveModuleState(0.0, Rotation2d.fromDegrees(45))
+            });
+        }));
     }
 
     /**
