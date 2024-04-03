@@ -4,16 +4,25 @@
 
 package frc.robot;
 
+import java.util.List;
+
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SillyGuy;
-import frc.robot.autos.AutosTimer;
+import frc.robot.subsystems.Swerve;
+import frc.robot.autos.exampleAuto;
+import frc.robot.commands.AutoIntakeStart;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
 
@@ -32,14 +41,16 @@ public class Robot extends TimedRobot {
   
   private RobotContainer m_robotContainer;
 
+  Swerve s_Swerve = m_robotContainer.s_Swerve;
+
   public int autoNumber = 0;
   private double autoTimer = 0.0f;
   private Shooter cShooter = new Shooter(31, 32, 1);
   private Climber cClimber = new Climber(38, 39, 0);
   private Intake cIntake = new Intake(34, 35, 36, 1);
   private SillyGuy cSillyGuy = new SillyGuy(36, 1);
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
+  private static final String kDefaultAuto = "Move Forward";
+  private static final String kCustomAuto = "Shoot";
   private static final String kCustomAuto2 = "My Auto 2";
   private static final String kCustomAuto3 = "My Auto 3";
   private static final String kCustomAuto4 = "My Auto 4";
@@ -55,18 +66,19 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
 
-    m_chooser.setDefaultOption("Move Forward", kDefaultAuto);
-    m_chooser.addOption("Shoot", kCustomAuto);
+    m_chooser.setDefaultOption(kDefaultAuto, kDefaultAuto);
+    m_chooser.addOption(kCustomAuto, kCustomAuto);
     m_chooser.addOption("Do Nothing", kCustomAuto0);
     m_chooser.addOption("Middle 2 and leave", kCustomAuto2);
     m_chooser.addOption("Blue Middle 3 and leave", kCustomAuto3);
     m_chooser.addOption("Blue Left 3 and leave", kCustomAuto4);
-     m_chooser.addOption("Right 3 and leave", kCustomAuto5);
+    m_chooser.addOption("Right 3 and leave", kCustomAuto5);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
