@@ -4,8 +4,9 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Climber {
+public class Climber extends SubsystemBase{
     private float speed = 1f;
     private CANSparkMax motor1;
     private CANSparkMax motor2;

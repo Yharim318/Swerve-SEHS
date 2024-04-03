@@ -7,11 +7,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
 
-public class AutoIntakeStop extends Command {
+public class AutoIntake extends Command {
   /** Creates a new AutoIntake. */
   private Intake cIntake;
-  public AutoIntakeStop(Intake cIntake) {
+  float speed;
+  public AutoIntake(Intake cIntake, float speed) {
     this.cIntake = cIntake;
+    this.speed = speed;
     addRequirements(cIntake);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -23,7 +25,7 @@ public class AutoIntakeStop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    cIntake.Stop();
+    cIntake.Start();
   }
 
   // Called once the command ends or is interrupted.
