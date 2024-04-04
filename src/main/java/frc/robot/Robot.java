@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SillyGuy;
@@ -110,7 +109,7 @@ public class Robot extends TimedRobot {
           new AutoSillyGuy(cSillyGuy, 0.4f),
           new AutoShooter(cShooter, 0),
           new AutoSillyGuy(cSillyGuy, 0),
-          new ParallelRaceGroup
+          new ParallelCommandGroup
             (
             new exampleAuto(s_Swerve, List.of(new Pose2d(3, 0, new Rotation2d(0)))),
             new AutoIntake(cIntake, 0.4f)
@@ -123,7 +122,8 @@ public class Robot extends TimedRobot {
             new AutoShooter(cShooter, 0.95f)
             ),
           new AutoSillyGuy(cSillyGuy, 0.4f),
-          new AutoSillyGuy(cSillyGuy, 0)
+          new AutoSillyGuy(cSillyGuy, 0),
+          new AutoShooter(cShooter, 0)
           );
         break;
       case ThreePiece:
@@ -132,7 +132,7 @@ public class Robot extends TimedRobot {
           new AutoSillyGuy(cSillyGuy, 0.4f),
           new AutoShooter(cShooter, 0),
           new AutoSillyGuy(cSillyGuy, 0),
-          new ParallelRaceGroup
+          new ParallelCommandGroup
             (
             new exampleAuto(s_Swerve, List.of(new Pose2d(3, 0, new Rotation2d(0)))),
             new AutoIntake(cIntake, 0.4f)
