@@ -145,7 +145,8 @@ public class Robot extends TimedRobot {
             new AutoShooter(cShooter, 0.95f)
             ),
           new AutoSillyGuy(cSillyGuy, 0.4f),
-          new AutoSillyGuy(cSillyGuy, 0)
+          new AutoSillyGuy(cSillyGuy, 0),
+          new AutoShooter(cShooter, 0)
           );
         break;
 

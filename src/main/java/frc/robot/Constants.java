@@ -19,7 +19,7 @@ public final class Constants {
         public static final int pigeonID = 40;
 
         public static final COTSTalonFXSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot
-        COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.Falcon500(COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.driveRatios.X2_10);
+        COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.Falcon500(COTSTalonFXSwerveConstants.WCP.SwerveXFlipped.driveRatios.X1_12);
 
         /* Drivetrain Constants */
         public static final double trackWidth = Units.inchesToMeters(30); //TODO: This must be tuned to specific robot
@@ -36,7 +36,7 @@ public final class Constants {
 
         /* Module Gear Ratios */
         public static final double driveGearRatio = chosenModule.driveGearRatio;
-        public static final double angleGearRatio = chosenModule.angleGearRatio*1.15384;
+        public static final double angleGearRatio = 15.425;
 
         /* Motor Inverts */
         public static final InvertedValue angleMotorInvert = chosenModule.angleMotorInvert;
