@@ -26,9 +26,7 @@ public class exampleAuto extends SequentialCommandGroup {
         // An example trajectory to follow.  All units in meters.
         Trajectory exampleTrajectory =
             TrajectoryGenerator.generateTrajectory(
-                
                 coords,
-                
                 config);
 
         var thetaController =
