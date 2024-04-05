@@ -5,11 +5,11 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj2.command.button.*;
+import edu.wpi.first.wpilibj2.command.*;;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,16 +29,22 @@ public class RobotContainer {
 
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kBack.value);
+    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton xMode = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /* Co_Driver Buttons */
     private final JoystickButton shootButton = new JoystickButton(co_driver, XboxController.Button.kY.value);
+    private final JoystickButton sillyForwardButton = new JoystickButton(co_driver, XboxController.Button.kRightBumper.value);
+    private final JoystickButton sillyBackwardButton = new JoystickButton(co_driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton intakeForwardButton = new JoystickButton(co_driver, XboxController.Button.kA.value);
+    private final JoystickButton intakeBackwardButton = new JoystickButton(co_driver, XboxController.Button.kB.value);
+
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
     public final SillyGuy sillyGuy = Robot.cSillyGuy;
     public final Shooter shooter = Robot.cShooter;
+    public final Intake intake = Robot.cIntake;
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -78,6 +84,11 @@ public class RobotContainer {
 
         /* Co_driver Buttons */
         shootButton.onTrue(new Shoot(shooter, sillyGuy));
+        sillyBackwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(-intake.getSpeed())));
+        sillyForwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(intake.getSpeed())));
+        intakeBackwardButton.whileTrue(new InstantCommand(() -> intake.Set(-intake.getSpeed())));
+        intakeForwardButton.whileTrue(new InstantCommand(() -> intake.Set(intake.getSpeed())));
+        
     }
 
     /**

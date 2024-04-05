@@ -46,15 +46,10 @@ public class Intake extends SubsystemBase{
       //IntakeMotor3.set(-speed);
     }
   }
-  public void Start(){
-    IntakeMotor1.set(speed);
-    IntakeMotor2.set(speed);
+  public void Set(float speed_){
+    IntakeMotor1.set(speed_);
+    IntakeMotor2.set(speed_);
     //IntakeMotor3.set(speed);
-  }
-  public void Stop(){
-    IntakeMotor1.set(0);
-    IntakeMotor2.set(0);
-    //IntakeMotor3.set(0);
   }
 }
 

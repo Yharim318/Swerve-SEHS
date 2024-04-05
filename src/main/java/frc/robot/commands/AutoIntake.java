@@ -30,7 +30,7 @@ public class AutoIntake extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    cIntake.Start();
+    cIntake.Set(speed);
     current += period;
   }
 
@@ -43,7 +43,7 @@ public class AutoIntake extends Command {
   @Override
   public boolean isFinished() {
     if (current < timer){
-      cIntake.Stop();
+      cIntake.Set(0);
       return false;
     }
     else
