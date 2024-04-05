@@ -13,9 +13,9 @@ public class AutoSillyGuy extends Command {
   public float speed;
   public AutoSillyGuy(SillyGuy cSillyGuy, float speed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(cSillyGuy);
     this.cSillyGuy = cSillyGuy;
     this.speed = speed;
+    addRequirements(cSillyGuy);
   }
 
   // Called when the command is initially scheduled.
@@ -35,6 +35,6 @@ public class AutoSillyGuy extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

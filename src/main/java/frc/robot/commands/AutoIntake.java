@@ -48,6 +48,5 @@ public class AutoIntake extends Command {
     }
     else
       return true;
-      
   }
 }
