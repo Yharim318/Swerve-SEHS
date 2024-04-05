@@ -14,7 +14,7 @@ public class Shoot extends Command {
   private Shooter cShooter;
   private SillyGuy cSillyGuy;
   private double kDefaultPeriod = Robot.kDefaultPeriod;
-  private double ShooterStartTime = 0.5;
+  private double ShooterStartTime = 1;
   private double SillyGuyStartTime = 1.5;
   private double EndTime = 2;
   private double timer;
@@ -39,13 +39,13 @@ public class Shoot extends Command {
     timer += kDefaultPeriod;
 
     if (timer < SillyGuyStartTime){
-      cSillyGuy.SillyVroom(-0.4f);
+      cSillyGuy.SillyVroom(-0.8f);
     }
-    else {
-      cSillyGuy.SillyVroom(0.4f);
+    else if (timer >= SillyGuyStartTime){
+      cSillyGuy.SillyVroom(0.8f);
     }
     if (timer >= ShooterStartTime){
-      cShooter.ShootManual(0.95f);
+      cShooter.ShootManual(0.9f);
     }
   }
 

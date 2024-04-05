@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Shooter;
@@ -105,15 +106,11 @@ public class Robot extends TimedRobot {
     switch (m_autoSelected) {
       case TwoPiece:
         m_autonomousCommand = new SequentialCommandGroup(
-          new Shoot(cShooter, cSillyGuy),
-          new ParallelRaceGroup
-            (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(3, 0, new Rotation2d(0)))),
-            new AutoIntake(cIntake, 0.4f, 10)
-            ),
-          new exampleAuto(s_Swerve, List.of(new Pose2d(-3, 0, new Rotation2d(0)))),
-          new Shoot(cShooter, cSillyGuy)
-          );
+          //new Shoot(cShooter, cSillyGuy),
+          new exampleAuto(s_Swerve, List.of(new Pose2d(1, 0, new Rotation2d(0)), new Pose2d(1, 1, new Rotation2d(0)))),//,
+          new exampleAuto(s_Swerve, List.of(new Pose2d(-1, 0, new Rotation2d(0)), new Pose2d(-2, 0, new Rotation2d(0)))));
+          //new Shoot(cShooter, cSillyGuy)
+          
         break;
 
     }
