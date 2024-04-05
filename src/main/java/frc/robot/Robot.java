@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
   
   private RobotContainer m_robotContainer;
 
-  Swerve s_Swerve = m_robotContainer.s_Swerve;
+  Swerve s_Swerve;
   public static Shooter cShooter = new Shooter(31, 32, 1);
   private static Climber cClimber = new Climber(38, 39, 0);
   public static Intake cIntake = new Intake(34, 35, 36, 1);
@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    s_Swerve = m_robotContainer.s_Swerve;
     CameraServer.startAutomaticCapture().setFPS(10);
     m_chooser.setDefaultOption(Nothing, Nothing);
     m_chooser.addOption(TwoPiece, TwoPiece);
