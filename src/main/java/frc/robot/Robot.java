@@ -15,15 +15,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SillyGuy;
 import frc.robot.subsystems.Swerve;
 import frc.robot.autos.exampleAuto;
 import frc.robot.commands.AutoIntake;
-import frc.robot.commands.AutoShooter;
-import frc.robot.commands.AutoSillyGuy;
+import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
 
@@ -43,13 +42,12 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   Swerve s_Swerve = m_robotContainer.s_Swerve;
-  private Shooter cShooter = new Shooter(31, 32, 1);
-  private Climber cClimber = new Climber(38, 39, 0);
-  private Intake cIntake = new Intake(34, 35, 36, 1);
-  private SillyGuy cSillyGuy = new SillyGuy(36, 1);
+  public static Shooter cShooter = new Shooter(31, 32, 1);
+  private static Climber cClimber = new Climber(38, 39, 0);
+  public static Intake cIntake = new Intake(34, 35, 36, 1);
+  public static SillyGuy cSillyGuy = new SillyGuy(36, 1);
   private static final String Nothing = "Nothing";
   private static final String TwoPiece = "2 Piece";
-  private static final String ThreePiece = "3 Piece";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
@@ -66,7 +64,6 @@ public class Robot extends TimedRobot {
 
     m_chooser.setDefaultOption(Nothing, Nothing);
     m_chooser.addOption(TwoPiece, TwoPiece);
-    m_chooser.addOption(ThreePiece, ThreePiece);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
@@ -105,48 +102,15 @@ public class Robot extends TimedRobot {
     switch (m_autoSelected) {
       case TwoPiece:
         m_autonomousCommand = new SequentialCommandGroup(
-          new AutoShooter(cShooter, 0.95f),
-          new AutoSillyGuy(cSillyGuy, 0.4f),
-          new AutoShooter(cShooter, 0),
-          new AutoSillyGuy(cSillyGuy, 0),
-          new ParallelCommandGroup
+          new Shoot(cShooter, cSillyGuy),
+          new ParallelRaceGroup
             (
             new exampleAuto(s_Swerve, List.of(new Pose2d(3, 0, new Rotation2d(0)))),
-            new AutoIntake(cIntake, 0.4f)
+            new AutoIntake(cIntake, 0.4f, 10)
             ),
-          new AutoIntake(cIntake, 0),
-          new ParallelCommandGroup
-            (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-3, 0, new Rotation2d(0)))),
-            new AutoSillyGuy(cSillyGuy, -0.2f),
-            new AutoShooter(cShooter, 0.95f)
-            ),
-          new AutoSillyGuy(cSillyGuy, 0.4f),
-          new AutoSillyGuy(cSillyGuy, 0),
-          new AutoShooter(cShooter, 0)
-          );
-        break;
-      case ThreePiece:
-        m_autonomousCommand = new SequentialCommandGroup(
-          new AutoShooter(cShooter, 0.95f),
-          new AutoSillyGuy(cSillyGuy, 0.4f),
-          new AutoShooter(cShooter, 0),
-          new AutoSillyGuy(cSillyGuy, 0),
-          new ParallelCommandGroup
-            (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(3, 0, new Rotation2d(0)))),
-            new AutoIntake(cIntake, 0.4f)
-            ),
-          new AutoIntake(cIntake, 0),
-          new ParallelCommandGroup
-            (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-3, 0, new Rotation2d(0)))),
-            new AutoSillyGuy(cSillyGuy, -0.2f),
-            new AutoShooter(cShooter, 0.95f)
-            ),
-          new AutoSillyGuy(cSillyGuy, 0.4f),
-          new AutoSillyGuy(cSillyGuy, 0),
-          new AutoShooter(cShooter, 0)
+          new AutoIntake(cIntake, 0, 0.1f),
+          new exampleAuto(s_Swerve, List.of(new Pose2d(-3, 0, new Rotation2d(0)))),
+          new Shoot(cShooter, cSillyGuy)
           );
         break;
 
