@@ -94,7 +94,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), 0, false, false);
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     m_autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + m_autoSelected);
 

@@ -5,7 +5,6 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -32,6 +31,8 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton xMode = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+
+    /* Co_Driver Buttons */
     private final JoystickButton shootButton = new JoystickButton(co_driver, XboxController.Button.kY.value);
 
     /* Subsystems */
@@ -83,8 +84,15 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return null;
-    }
+
+    /* 
+     *  
+     * Use this if needed
+     * 
+     * 
+     * public Command getAutonomousCommand() {
+     *   // An ExampleCommand will run in autonomous
+     *  return null;
+     * }
+     */
 }
