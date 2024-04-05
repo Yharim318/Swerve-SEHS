@@ -107,7 +107,6 @@ public class Robot extends TimedRobot {
             new exampleAuto(s_Swerve, List.of(new Pose2d(3, 0, new Rotation2d(0)))),
             new AutoIntake(cIntake, 0.4f, 10)
             ),
-          new AutoIntake(cIntake, 0, 0.1f),
           new exampleAuto(s_Swerve, List.of(new Pose2d(-3, 0, new Rotation2d(0)))),
           new Shoot(cShooter, cSillyGuy)
           );
@@ -122,9 +121,7 @@ public class Robot extends TimedRobot {
   }
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {
-    
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {

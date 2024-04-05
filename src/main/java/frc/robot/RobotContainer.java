@@ -76,6 +76,7 @@ public class RobotContainer {
             });
         }));
 
+        /* Co_driver Buttons */
         shootButton.onTrue(new Shoot(shooter, sillyGuy));
     }
 
@@ -87,7 +88,7 @@ public class RobotContainer {
 
     /* 
      *  
-     * Use this if needed
+     * Use this if needed.
      * 
      * 
      * public Command getAutonomousCommand() {
