@@ -71,7 +71,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
 
         /* Driver Buttons */
-        
+
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         xMode.whileTrue(s_Swerve.run(() -> {
@@ -86,8 +86,10 @@ public class RobotContainer {
         /* Co_driver Buttons */
 
         shootButton.onTrue(new Shoot(shooter, sillyGuy));
+
         sillyBackwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(-intake.getSpeed())));
         sillyForwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(intake.getSpeed())));
+        
         intakeBackwardButton.whileTrue(new InstantCommand(() -> intake.Set(-intake.getSpeed())));
         intakeForwardButton.whileTrue(new InstantCommand(() -> intake.Set(intake.getSpeed())));
         
