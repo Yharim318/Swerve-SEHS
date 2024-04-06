@@ -39,7 +39,6 @@ public class RobotContainer {
     private final JoystickButton intakeForwardButton = new JoystickButton(co_driver, XboxController.Button.kA.value);
     private final JoystickButton intakeBackwardButton = new JoystickButton(co_driver, XboxController.Button.kB.value);
 
-
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
     public final SillyGuy sillyGuy = Robot.cSillyGuy;
@@ -70,7 +69,9 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+
         /* Driver Buttons */
+
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         xMode.whileTrue(s_Swerve.run(() -> {
@@ -83,9 +84,12 @@ public class RobotContainer {
         }));
 
         /* Co_driver Buttons */
+
         shootButton.onTrue(new Shoot(shooter, sillyGuy));
+
         sillyBackwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(-intake.getSpeed())));
         sillyForwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(intake.getSpeed())));
+        
         intakeBackwardButton.whileTrue(new InstantCommand(() -> intake.Set(-intake.getSpeed())));
         intakeForwardButton.whileTrue(new InstantCommand(() -> intake.Set(intake.getSpeed())));
         
