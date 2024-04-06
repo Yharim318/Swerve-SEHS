@@ -34,4 +34,8 @@ public class Climber extends SubsystemBase{
         motor2.set((fast * xbox.getLeftTriggerAxis()));
         
     }
+    @Override
+    public void periodic(){
+        Climb();
+    }
 }
