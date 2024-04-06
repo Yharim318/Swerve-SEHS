@@ -41,6 +41,7 @@ public class RobotContainer {
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
+    public final Climber climber = Robot.cClimber;
     public final SillyGuy sillyGuy = Robot.cSillyGuy;
     public final Shooter shooter = Robot.cShooter;
     public final Intake intake = Robot.cIntake;

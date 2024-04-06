@@ -42,6 +42,7 @@ public class Robot extends TimedRobot {
 
   Swerve s_Swerve;
   public static Shooter cShooter = new Shooter(31, 32, 1);
+  public static Climber cClimber = new Climber(38, 39, 0);
   public static Intake cIntake = new Intake(34, 35, 36, 1);
   public static SillyGuy cSillyGuy = new SillyGuy(36, 1);
   private static final String Nothing = "Nothing";
@@ -57,7 +58,7 @@ public class Robot extends TimedRobot {
 
     /*
      * if (robot.exists){
-     *  boolean QualifiedForWorlds = true;
+     *  bollean QualifiedForWorlds = true;
      *  boolean AtWorlds = true;
      * }
      */
