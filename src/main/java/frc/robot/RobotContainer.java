@@ -88,11 +88,15 @@ public class RobotContainer {
 
         shootButton.onTrue(new Shoot(shooter, sillyGuy));
 
-        sillyBackwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(-intake.getSpeed())));
-        sillyForwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(intake.getSpeed())));
+        sillyBackwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(intake.getSpeed())));
+        sillyForwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(-intake.getSpeed())));
+        sillyForwardButton.whileFalse(new InstantCommand(() -> sillyGuy.SillyVroom(0)));
+        sillyBackwardButton.whileFalse(new InstantCommand(() -> sillyGuy.SillyVroom(0)));
         
         intakeBackwardButton.whileTrue(new InstantCommand(() -> intake.Set(-intake.getSpeed())));
+        intakeBackwardButton.whileFalse(new InstantCommand(() -> intake.Set(0)));
         intakeForwardButton.whileTrue(new InstantCommand(() -> intake.Set(intake.getSpeed())));
+        intakeForwardButton.whileFalse(new InstantCommand(() -> intake.Set(0)));
         
     }
 
