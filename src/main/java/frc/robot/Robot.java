@@ -4,26 +4,19 @@
 
 package frc.robot;
 
-import java.util.List;
-
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SillyGuy;
 import frc.robot.subsystems.Swerve;
-import frc.robot.autos.exampleAuto;
-import frc.robot.commands.AutoIntake;
+import frc.robot.commands.LeftPiece;
 import frc.robot.commands.MiddlePiece;
+import frc.robot.commands.RightPiece;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
@@ -123,85 +116,23 @@ public class Robot extends TimedRobot {
       case ThreePieceLeft:
         m_autonomousCommand = new SequentialCommandGroup(
           new Shoot(cShooter, cSillyGuy),
-          new ParallelRaceGroup
-          (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(1, 0, Rotation2d.fromDegrees(0)), new Pose2d(2, 0, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new ParallelRaceGroup
-          (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-1, 0, Rotation2d.fromDegrees(0)), new Pose2d(-2, 0, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, 0, 3)
-          ),
-          new Shoot(cShooter, cSillyGuy),
-          new ParallelRaceGroup(
-            new exampleAuto(s_Swerve, List.of(new Pose2d(0, 2, Rotation2d.fromDegrees(0)), new Pose2d(2, 2, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new ParallelRaceGroup(
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-2, 0, Rotation2d.fromDegrees(0)), new Pose2d(-2, -2, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new Shoot(cShooter, cSillyGuy)
+          new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new LeftPiece(s_Swerve, cIntake, cShooter, cSillyGuy)
           );
         break;
       case ThreePieceRight:
         m_autonomousCommand = new SequentialCommandGroup(
           new Shoot(cShooter, cSillyGuy),
-          new ParallelRaceGroup
-          (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(1, 0, Rotation2d.fromDegrees(0)), new Pose2d(2, 0, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new ParallelRaceGroup
-          (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-1, 0, Rotation2d.fromDegrees(0)), new Pose2d(-2, 0, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, 0, 3)
-          ),
-          new Shoot(cShooter, cSillyGuy),
-          new ParallelRaceGroup(
-            new exampleAuto(s_Swerve, List.of(new Pose2d(0, -2, Rotation2d.fromDegrees(0)), new Pose2d(2, -2, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new ParallelRaceGroup(
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-2, 0, Rotation2d.fromDegrees(0)), new Pose2d(-2, 2, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new Shoot(cShooter, cSillyGuy)
+          new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new RightPiece(s_Swerve, cIntake, cShooter, cSillyGuy)
           );
         break;
       case FourPiece:
         m_autonomousCommand = new SequentialCommandGroup(
           new Shoot(cShooter, cSillyGuy),
-          new ParallelRaceGroup
-          (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(1, 0, Rotation2d.fromDegrees(0)), new Pose2d(2, 0, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new ParallelRaceGroup
-          (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-1, 0, Rotation2d.fromDegrees(0)), new Pose2d(-2, 0, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, 0, 3)
-          ),
-          new Shoot(cShooter, cSillyGuy),
-          new ParallelRaceGroup(
-            new exampleAuto(s_Swerve, List.of(new Pose2d(0, -2, Rotation2d.fromDegrees(0)), new Pose2d(2, -2, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new ParallelRaceGroup(
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-2, 0, Rotation2d.fromDegrees(0)), new Pose2d(-2, 2, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new Shoot(cShooter, cSillyGuy),
-          new ParallelRaceGroup(
-            new exampleAuto(s_Swerve, List.of(new Pose2d(0, 2, Rotation2d.fromDegrees(0)), new Pose2d(2, 2, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new ParallelRaceGroup(
-            new exampleAuto(s_Swerve, List.of(new Pose2d(-2, 0, Rotation2d.fromDegrees(0)), new Pose2d(-2, -2, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, cIntake.getSpeed(), 3)
-          ),
-          new Shoot(cShooter, cSillyGuy)
+          new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new RightPiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new LeftPiece(s_Swerve, cIntake, cShooter, cSillyGuy)
           );
         break;
     }

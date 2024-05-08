@@ -20,16 +20,16 @@ import frc.robot.autos.exampleAuto;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class MiddlePiece extends ParallelCommandGroup {
+public class LeftPiece extends ParallelCommandGroup {
   /** Creates a new MiddlePiece. */
-  public MiddlePiece(Swerve s_Swerve, Intake cIntake, Shooter cShooter, SillyGuy cSillyGuy) {
+  public LeftPiece(Swerve s_Swerve, Intake cIntake, Shooter cShooter, SillyGuy cSillyGuy) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
             new SequentialCommandGroup(
               new exampleAuto(s_Swerve, List.of(
                 new Pose2d(0, 0, Rotation2d.fromDegrees(0)), 
-                new Pose2d(1, 0, Rotation2d.fromDegrees(0)), 
+                new Pose2d(1, 1, Rotation2d.fromDegrees(0)), 
                 new Pose2d(0.1, 0.1, Rotation2d.fromDegrees(0)), 
                 new Pose2d(0, 0, Rotation2d.fromDegrees(0))
               )),
