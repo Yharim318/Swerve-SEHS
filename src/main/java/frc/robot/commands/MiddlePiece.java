@@ -30,7 +30,6 @@ public class MiddlePiece extends ParallelCommandGroup {
               new exampleAuto(s_Swerve, List.of(
                 new Pose2d(0, 0, Rotation2d.fromDegrees(0)), 
                 new Pose2d(1, 0, Rotation2d.fromDegrees(0)), 
-                new Pose2d(1, 0.1, Rotation2d.fromDegrees(0)), 
                 new Pose2d(0.1, 0.1, Rotation2d.fromDegrees(0)), 
                 new Pose2d(0, 0, Rotation2d.fromDegrees(0))
               )),
@@ -44,7 +43,7 @@ public class MiddlePiece extends ParallelCommandGroup {
               })
             ),
             new SequentialCommandGroup(
-              new AutoIntake(cIntake, 0, 10),
+              new AutoIntake(cIntake, 0, 3),
               new Shoot(cShooter, cSillyGuy)
             )
           );
