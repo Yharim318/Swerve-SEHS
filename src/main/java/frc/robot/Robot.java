@@ -9,6 +9,7 @@ import java.util.List;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,6 +23,7 @@ import frc.robot.subsystems.SillyGuy;
 import frc.robot.subsystems.Swerve;
 import frc.robot.autos.exampleAuto;
 import frc.robot.commands.AutoIntake;
+import frc.robot.commands.MiddlePiece;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
@@ -113,18 +115,8 @@ public class Robot extends TimedRobot {
     switch (m_autoSelected) {
       case TwoPiece:
         m_autonomousCommand = new SequentialCommandGroup(
-          //new Shoot(cShooter, cSillyGuy),
-          new ParallelCommandGroup
-          (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), new Pose2d(2, 0, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, /*cIntake.getSpeed()*/ 0, 3)
-          ),
-          new ParallelRaceGroup
-          (
-            new exampleAuto(s_Swerve, List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), new Pose2d(0, 0, Rotation2d.fromDegrees(0)))),
-            new AutoIntake(cIntake, 0, 3)
-          )
-          //new Shoot(cShooter, cSillyGuy)
+          new Shoot(cShooter, cSillyGuy),
+          new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy)
           );
         break;
       

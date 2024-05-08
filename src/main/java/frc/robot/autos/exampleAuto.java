@@ -31,7 +31,7 @@ public class exampleAuto extends SequentialCommandGroup {
 
         var thetaController =
             new ProfiledPIDController(
-                Constants.AutoConstants.kPThetaController, 0, 0, Constants.AutoConstants.kThetaControllerConstraints);
+                Constants.AutoConstants.kPThetaController, 0.001, 0.001, Constants.AutoConstants.kThetaControllerConstraints);
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
         SwerveControllerCommand swerveControllerCommand =
@@ -39,8 +39,8 @@ public class exampleAuto extends SequentialCommandGroup {
                 exampleTrajectory,
                 s_Swerve::getPose,
                 Constants.Swerve.swerveKinematics,
-                new PIDController(Constants.AutoConstants.kPXController, 1, 1),
-                new PIDController(Constants.AutoConstants.kPYController, 1, 1),
+                new PIDController(Constants.AutoConstants.kPXController, 0.001, 0.001),
+                new PIDController(Constants.AutoConstants.kPYController, 0.001, 0.001),
                 thetaController,
                 s_Swerve::setModuleStates,
                 s_Swerve);
