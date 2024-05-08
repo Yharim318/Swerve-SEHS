@@ -6,20 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.SillyGuy;
-import frc.robot.subsystems.Swerve;
-import frc.robot.commands.LeftPiece;
-import frc.robot.commands.MiddlePiece;
-import frc.robot.commands.RightPiece;
-import frc.robot.commands.Shoot;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Intake;
+import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj2.command.*;
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -42,6 +32,7 @@ public class Robot extends TimedRobot {
   public static Intake cIntake = new Intake(34, 35, 36, 1);
   public static SillyGuy cSillyGuy = new SillyGuy(36, 1);
   private static final String Nothing = "Nothing";
+  private static final String OnePiece = "One Piece";
   private static final String TwoPiece = "2 Piece";
   private static final String ThreePieceLeft = "3 Piece Left";
   private static final String ThreePieceRight = "3 Piece Right";
@@ -68,6 +59,7 @@ public class Robot extends TimedRobot {
     s_Swerve = m_robotContainer.s_Swerve;
     CameraServer.startAutomaticCapture().setFPS(10);
     m_chooser.setDefaultOption(Nothing, Nothing);
+    m_chooser.addOption(OnePiece, OnePiece);
     m_chooser.addOption(TwoPiece, TwoPiece);
     m_chooser.addOption(ThreePieceLeft, ThreePieceLeft);
     m_chooser.addOption(ThreePieceRight, ThreePieceRight);
@@ -103,33 +95,36 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + m_autoSelected);
-
-
     switch (m_autoSelected) {
+      case Nothing:
+        m_autonomousCommand = new SequentialCommandGroup();
+        break;
+      case OnePiece:
+        m_autonomousCommand = new Shoot(cShooter, cSillyGuy, 0.9);
+        break;
       case TwoPiece:
         m_autonomousCommand = new SequentialCommandGroup(
-          new Shoot(cShooter, cSillyGuy),
+          new Shoot(cShooter, cSillyGuy, 0.9),
           new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy)
           );
         break;
-      
       case ThreePieceLeft:
         m_autonomousCommand = new SequentialCommandGroup(
-          new Shoot(cShooter, cSillyGuy),
-          new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new Shoot(cShooter, cSillyGuy, 0.9),
+          //new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
           new LeftPiece(s_Swerve, cIntake, cShooter, cSillyGuy)
           );
         break;
       case ThreePieceRight:
         m_autonomousCommand = new SequentialCommandGroup(
-          new Shoot(cShooter, cSillyGuy),
+          new Shoot(cShooter, cSillyGuy, 0.9),
           new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
           new RightPiece(s_Swerve, cIntake, cShooter, cSillyGuy)
           );
         break;
       case FourPiece:
         m_autonomousCommand = new SequentialCommandGroup(
-          new Shoot(cShooter, cSillyGuy),
+          new Shoot(cShooter, cSillyGuy, 0.9),
           new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
           new RightPiece(s_Swerve, cIntake, cShooter, cSillyGuy),
           new LeftPiece(s_Swerve, cIntake, cShooter, cSillyGuy)

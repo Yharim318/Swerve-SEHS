@@ -86,7 +86,7 @@ public class RobotContainer {
 
         /* Co_driver Buttons */
 
-        shootButton.onTrue(new Shoot(shooter, sillyGuy));
+        shootButton.onTrue(new Shoot(shooter, sillyGuy, 0.9));
 
         sillyBackwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(intake.getSpeed())));
         sillyForwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(-intake.getSpeed())));

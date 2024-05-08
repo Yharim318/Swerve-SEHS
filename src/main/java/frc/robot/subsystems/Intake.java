@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase{
-  private CANSparkMax IntakeMotor1;
-  private CANSparkMax IntakeMotor2;
+  public CANSparkMax IntakeMotor1;
+  public CANSparkMax IntakeMotor2;
   //private CANSparkMax IntakeMotor3;
   public XboxController cXboxController;
   float speed = 0.4f;

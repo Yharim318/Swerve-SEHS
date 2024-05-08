@@ -17,11 +17,13 @@ public class Shoot extends Command {
   private double ShooterStartTime = 1;
   private double SillyGuyStartTime = 1.5;
   private double EndTime = 2;
+  private double speed;
   private double timer;
-  public Shoot(Shooter cShooter, SillyGuy cSillyGuy) {
+  public Shoot(Shooter cShooter, SillyGuy cSillyGuy, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.cShooter = cShooter;
     this.cSillyGuy = cSillyGuy;
+    this.speed = speed;
     addRequirements(cShooter);
     addRequirements(cSillyGuy);
   }
@@ -39,13 +41,13 @@ public class Shoot extends Command {
     timer += kDefaultPeriod;
 
     if (timer < SillyGuyStartTime){
-      cSillyGuy.SillyVroom(-0.8f);
-    }
-    else if (timer >= SillyGuyStartTime){
       cSillyGuy.SillyVroom(0.8f);
     }
+    else if (timer >= SillyGuyStartTime){
+      cSillyGuy.SillyVroom(-0.8f);
+    }
     if (timer >= ShooterStartTime){
-      cShooter.ShootManual(0.9f);
+      cShooter.ShootManual(speed);
     }
   }
 
