@@ -16,11 +16,13 @@ import edu.wpi.first.wpilibj2.command.*;;
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
+ * if (Robot.isEnabled){
+ *   James.Alive = false;
+ * }
  */
 public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
-    private final Joystick co_driver = new Joystick(1);
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -30,14 +32,12 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-    private final JoystickButton xMode = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+    private final JoystickButton xMode = new JoystickButton(driver, XboxController.Button.kLeftStick.value);
 
     /* Co_Driver Buttons */
-    private final JoystickButton shootButton = new JoystickButton(co_driver, XboxController.Button.kY.value);
-    private final JoystickButton sillyForwardButton = new JoystickButton(co_driver, XboxController.Button.kRightBumper.value);
-    private final JoystickButton sillyBackwardButton = new JoystickButton(co_driver, XboxController.Button.kLeftBumper.value);
-    private final JoystickButton intakeForwardButton = new JoystickButton(co_driver, XboxController.Button.kA.value);
-    private final JoystickButton intakeBackwardButton = new JoystickButton(co_driver, XboxController.Button.kB.value);
+    private final JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+    private final JoystickButton intakeForwardButton = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton intakeBackwardButton = new JoystickButton(driver, XboxController.Button.kB.value);
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
@@ -87,11 +87,6 @@ public class RobotContainer {
         /* Co_driver Buttons */
 
         shootButton.onTrue(new Shoot(shooter, sillyGuy, 0.9));
-
-        sillyBackwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(intake.getSpeed())));
-        sillyForwardButton.whileTrue(new InstantCommand(() -> sillyGuy.SillyVroom(-intake.getSpeed())));
-        sillyForwardButton.whileFalse(new InstantCommand(() -> sillyGuy.SillyVroom(0)));
-        sillyBackwardButton.whileFalse(new InstantCommand(() -> sillyGuy.SillyVroom(0)));
         
         intakeBackwardButton.whileTrue(new InstantCommand(() -> intake.Set(-intake.getSpeed())));
         intakeBackwardButton.whileFalse(new InstantCommand(() -> intake.Set(0)));

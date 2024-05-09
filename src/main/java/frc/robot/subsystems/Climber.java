@@ -23,13 +23,9 @@ public class Climber extends SubsystemBase{
         motor2.set(0);
         float fast = speed;
         
-        if (xbox.getAButton()){
+        if (xbox.getXButton()){
             fast = -fast;
         }        
-        float slow = fast / 10;
-        if (xbox.getXButton()) {
-            fast = slow;
-        }
         motor1.set(-(fast * xbox.getRightTriggerAxis()));
         motor2.set((fast * xbox.getLeftTriggerAxis()));
         

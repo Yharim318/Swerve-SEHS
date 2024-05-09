@@ -30,7 +30,7 @@ public class MiddlePiece extends ParallelRaceGroup {
               new exampleAuto(s_Swerve, List.of(
                 new Pose2d(0, 0, Rotation2d.fromDegrees(0)), 
                 new Pose2d(1.3, 0, Rotation2d.fromDegrees(0)), 
-                new Pose2d(0.01, 0.01, Rotation2d.fromDegrees(0))
+                new Pose2d(0, 0.01, Rotation2d.fromDegrees(0))
               )),
               s_Swerve.run(() -> {
                 s_Swerve.setModuleStates(new SwerveModuleState[]{
@@ -44,7 +44,7 @@ public class MiddlePiece extends ParallelRaceGroup {
             new SequentialCommandGroup(
               new AutoIntake(cIntake, 0.8f, 3),
               new AutoIntake(cIntake, 0,0.1f),
-              new Shoot(cShooter, cSillyGuy, 0.8)
+              new Shoot(cShooter, cSillyGuy, 0.75)
             )
           );
   }

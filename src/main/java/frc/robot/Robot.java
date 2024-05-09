@@ -8,7 +8,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj2.command.*;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 
@@ -30,8 +29,8 @@ public class Robot extends TimedRobot {
   Swerve s_Swerve;
   public static Shooter cShooter = new Shooter(31, 32, 1);
   public static Climber cClimber = new Climber(38, 39, 0);
-  public static Intake cIntake = new Intake(34, 35, 36, 1);
   public static SillyGuy cSillyGuy = new SillyGuy(36, 1);
+  public static Intake cIntake = new Intake(34, 35, 36, 1, cSillyGuy);
   private static final String Nothing = "Nothing";
   private static final String OnePiece = "One Piece";
   private static final String TwoPiece = "2 Piece";
@@ -112,7 +111,7 @@ public class Robot extends TimedRobot {
       case ThreePieceLeft:
         m_autonomousCommand = new SequentialCommandGroup(
           new Shoot(cShooter, cSillyGuy, 0.9),
-          //new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
           new LeftPiece(s_Swerve, cIntake, cShooter, cSillyGuy)
           );
         break;
@@ -129,10 +128,10 @@ public class Robot extends TimedRobot {
           new PrintInstant("shoot:finished"),
           new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
           new PrintInstant("middle:finished"),
-          new RightPiece(s_Swerve, cIntake, cShooter, cSillyGuy),
-          new PrintInstant("right:finished"),
           new LeftPiece(s_Swerve, cIntake, cShooter, cSillyGuy),
-          new PrintInstant("left:finished")
+          new PrintInstant("left:finished"),
+          new RightPiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new PrintInstant("right:finished")
           );
         break;
     }
@@ -161,9 +160,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-    cClimber.Climb();
-  }
+  public void teleopPeriodic() {}
 
   @Override
   public void testInit() {

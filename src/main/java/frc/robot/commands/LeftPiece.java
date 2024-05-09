@@ -32,8 +32,8 @@ public class LeftPiece extends ParallelRaceGroup {
                 new Pose2d(0, 1.4, Rotation2d.fromDegrees(0)), 
                 new Pose2d(1.7, 1.4, Rotation2d.fromDegrees(0)), 
                 new Pose2d(1.8, 1.4, Rotation2d.fromDegrees(0)), 
-                new Pose2d(0, 1.4, Rotation2d.fromDegrees(0)), 
-                new Pose2d(0, -0.7, Rotation2d.fromDegrees(0))
+                new Pose2d(0.4, 1.4, Rotation2d.fromDegrees(0)), 
+                new Pose2d(0, -0.3, Rotation2d.fromDegrees(0))
               )),
               s_Swerve.run(() -> {
                 s_Swerve.setModuleStates(new SwerveModuleState[]{
@@ -47,7 +47,7 @@ public class LeftPiece extends ParallelRaceGroup {
             new SequentialCommandGroup(
               new AutoIntake(cIntake, 0.8f, 4.5f),
               new AutoIntake(cIntake, 0,0.1f),
-              new Shoot(cShooter, cSillyGuy, 0.8)
+              new Shoot(cShooter, cSillyGuy, 0.75)
             )
           );
   }

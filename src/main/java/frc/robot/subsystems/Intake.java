@@ -10,17 +10,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Intake extends SubsystemBase{
   public CANSparkMax IntakeMotor1;
   public CANSparkMax IntakeMotor2;
-  //private CANSparkMax IntakeMotor3;
+  private SillyGuy sillyguy;
   public XboxController cXboxController;
   float speed = 0.4f;
 
   public float getSpeed(){
     return speed;
   }
-  public Intake(int intakemotor1, int intakemotor2, int intakeMotor3, int controller ){
+  public Intake(int intakemotor1, int intakemotor2, int intakeMotor3, int controller, SillyGuy sillyGuy){
     IntakeMotor1 = new CANSparkMax(intakemotor1, MotorType.kBrushless);
     IntakeMotor2 = new CANSparkMax(intakemotor2, MotorType.kBrushless);
-    //IntakeMotor3 = new CANSparkMax(intakeMotor3, MotorType.kBrushless);
+    this.sillyguy = sillyGuy;
     IntakeMotor2.setInverted(false);
     IntakeMotor1.setInverted(false);
     //IntakeMotor3.setInverted(true);
@@ -38,17 +38,19 @@ public class Intake extends SubsystemBase{
     if (cXboxController.getAButton()){
       IntakeMotor1.set(speed);
       IntakeMotor2.set(speed);
-      //IntakeMotor3.set(speed);
+      sillyguy.SillyVroom(speed);
     }
     else if (cXboxController.getBButton()){
       IntakeMotor1.set(-speed);
       IntakeMotor2.set(-speed);
+      sillyguy.SillyVroom(-speed);
       //IntakeMotor3.set(-speed);
     }
   }
   public void Set(float speed_){
     IntakeMotor1.set(speed_);
     IntakeMotor2.set(speed_);
+    sillyguy.SillyVroom(-speed_);
     //IntakeMotor3.set(speed);
   }
 }
