@@ -8,6 +8,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj2.command.*;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 
@@ -125,9 +126,13 @@ public class Robot extends TimedRobot {
       case FourPiece:
         m_autonomousCommand = new SequentialCommandGroup(
           new Shoot(cShooter, cSillyGuy, 0.9),
+          new PrintInstant("shoot:finished"),
           new MiddlePiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new PrintInstant("middle:finished"),
           new RightPiece(s_Swerve, cIntake, cShooter, cSillyGuy),
-          new LeftPiece(s_Swerve, cIntake, cShooter, cSillyGuy)
+          new PrintInstant("right:finished"),
+          new LeftPiece(s_Swerve, cIntake, cShooter, cSillyGuy),
+          new PrintInstant("left:finished")
           );
         break;
     }

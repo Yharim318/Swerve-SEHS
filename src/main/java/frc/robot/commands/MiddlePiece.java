@@ -9,7 +9,7 @@ import java.util.List;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -20,7 +20,7 @@ import frc.robot.autos.exampleAuto;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class MiddlePiece extends ParallelCommandGroup {
+public class MiddlePiece extends ParallelRaceGroup {
   /** Creates a new MiddlePiece. */
   public MiddlePiece(Swerve s_Swerve, Intake cIntake, Shooter cShooter, SillyGuy cSillyGuy) {
     // Add your commands in the addCommands() call, e.g.
