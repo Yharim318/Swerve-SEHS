@@ -45,7 +45,7 @@ public class LeftPiece extends ParallelRaceGroup {
               })
             ),
             new SequentialCommandGroup(
-              new AutoIntake(cIntake, 0.8f, 4.5f),
+              new AutoIntake(cIntake, 0.8f, 4.8f),
               new AutoIntake(cIntake, 0,0.1f),
               new Shoot(cShooter, cSillyGuy, 0.75)
             )
