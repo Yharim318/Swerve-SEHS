@@ -12,7 +12,7 @@ public class Intake extends SubsystemBase{
   public CANSparkMax IntakeMotor2;
   private SillyGuy sillyguy;
   public XboxController cXboxController;
-  float speed = 0.4f;
+  float speed = 0.2f;
 
   public float getSpeed(){
     return speed;

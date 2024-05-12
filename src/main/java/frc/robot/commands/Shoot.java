@@ -14,9 +14,9 @@ public class Shoot extends Command {
   private Shooter cShooter;
   private SillyGuy cSillyGuy;
   private double kDefaultPeriod = Robot.kDefaultPeriod;
-  private double ShooterStartTime = 0.1;
-  private double SillyGuyStartTime = 0.2;
-  private double EndTime = 0.5;
+  private double ShooterStartTime = 0.2;
+  private double SillyGuyStartTime = 0.3;
+  private double EndTime = 0.8;
   private double speed;
   private double timer;
   public Shoot(Shooter cShooter, SillyGuy cSillyGuy, double speed) {
