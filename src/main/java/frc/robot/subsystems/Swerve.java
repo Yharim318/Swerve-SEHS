@@ -15,13 +15,37 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.Units;
+import edu.wpi.first.units.Voltage;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+
 
 public class Swerve extends SubsystemBase {
+
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
+    // SysIdRoutine routine = new SysIdRoutine(
+    //     new SysIdRoutine.Config(),
+    //     new SysIdRoutine.Mechanism(
+    //         voltage -> {
+    //             mSwerveMods[0].setDriveVoltage(voltage);
+    //             mSwerveMods[1].setDriveVoltage(voltage);
+    //             mSwerveMods[2].setDriveVoltage(voltage);
+    //             mSwerveMods[3].setDriveVoltage(voltage);
+    //         },
+    //         log -> {
+    //             log.motor("drive-left")
+    //                 .voltage(mSwerveMods[0].getDriveMotor().get() * RobotController.getBatteryVoltage(), Units.Volts)
+    //                 .linearPosition(mSwerveMods[0].getCANcoder(), Units.Meters)
+                    
+    //         }, this
+    //         )
+    // );
 
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);

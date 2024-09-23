@@ -10,6 +10,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import frc.lib.math.Conversions;
 import frc.lib.util.SwerveModuleConstants;
 
@@ -65,6 +66,13 @@ public class SwerveModule {
             driveVelocity.FeedForward = driveFeedForward.calculate(desiredState.speedMetersPerSecond);
             mDriveMotor.setControl(driveVelocity);
         }
+    }
+
+    public void setDriveVoltage(double volts){
+        mDriveMotor.setVoltage(volts);
+    }
+    public TalonFX getDriveMotor() {
+        return mDriveMotor;
     }
 
     public Rotation2d getCANcoder(){
